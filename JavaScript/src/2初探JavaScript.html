@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" id='skin' type="text/css" href="./css2.css">
+        <style>
+            #div1 {width: 100px;height: 200px;background: #ccc;border: solid #999;display: none;}
+            #div2 {width: 200px;height: 200px;background: red;border: solid #999;display: block;}
+            #div3 {width: 100px;height: 200px;background: #ccc;border: solid #999;display: none;}
+            .class1 {width: 50px;height: 50px; border: solid black; margin: 8px;}
+            /* #div7 .class2{background: yellow;} */
+            #div7 div{width: 140px;height: 100px;border: solid black; margin: 5px;}
+        </style>
+
+        <script>
+            // 设置颜色
+            function toGreen(){
+                var Div2 = document.getElementById('div2');
+                Div2.style.background = 'green';
+                Div2.style.width = '300px';
+                Div2.style.height = '300px';
+            }
+            function toRed(){
+                var Div2 = document.getElementById('div2');
+                Div2.style.background = 'red';
+                Div2.style.width = '200px';
+                Div2.style.height = '200px';
+            }
+
+            // 设置皮肤
+            function skin1(){
+                Skin = document.getElementById('skin');
+                Skin.href = "./css1.css";
+            }
+            function skin2(){
+                Skin = document.getElementById('skin');
+                Skin.href = "./css2.css";
+            }
+
+            // 展示与隐藏
+            function showHide(){
+                Div3 = document.getElementById("div3");
+                if(Div3.style.display == 'none'){
+                    Div3.style.display = 'block';
+                }else{
+                    Div3.style.display = 'none';
+                }    
+            }
+
+            window.onload = function(){
+                // 点击变色
+                var butOnclick = document.getElementById("div4");
+                butOnclick.onclick = function(){
+                if(butOnclick.style.background == 'red')
+                    butOnclick.style.background = 'yellow';
+                else
+                    butOnclick.style.background = 'red';
+                };
+
+                // 多个div背景设置
+                var setcolors = document.getElementsByClassName("class1");
+                for(var i=0; i< setcolors.length; i++){
+                    setcolors[i].style.background = 'yellow';
+                }
+
+                // 全选，不选，反选
+                var select_button = document.getElementById('div5');
+                var buttons = select_button.getElementsByTagName('input');
+                var select_checkbox = document.getElementById('div6');
+                var checkboxs = select_checkbox.getElementsByTagName('input');
+                
+
+                for(var i=0; i < buttons.length; i++){
+                    buttons[i].onclick = function(){
+                        if(this.value == '全选'){
+                            for(var j=0; j < checkboxs.length; j++){
+                                checkboxs[j].checked = true;
+                            }
+                        }else if (this.value == '不选'){
+                            for(var j=0; j < checkboxs.length; j++){
+                                checkboxs[j].checked = false;
+                            }
+                        }else{
+                            for(var j=0; j < checkboxs.length; j++){
+                                checkboxs[j].checked = !checkboxs[j].checked;
+                            }
+                        }
+                    }
+                }
+
+
+                // 选项卡
+                var upper = ["111","222","333"];
+                var selects = document.getElementById('div7');
+                var selects_input = selects.getElementsByTagName('input');
+                var selects_div = selects.getElementsByTagName('div')[0];
+
+                for(var i=0; i < selects_input.length; i++){
+                    selects_input[i].index = i; //增加一个新的对象元素
+                    selects_input[i].onclick = function(){
+                        // alert(i)，内部不能用i，i都是selects_input.length，不知道为甚
+                        selects_div.innerHTML = upper[this.index];
+                    }
+                }
+
+            }
+
+        </script>
+
+    </head>
+
+    <body>
+        <!-- <input type="checkbox" onmouseover="div1.style.display='block'" onmouseout="div1.style.display='none'"/> -->
+        <input type="checkbox" onmouseover="document.getElementById('div1').style.display='block'" 
+                onmouseout="document.getElementById('div1').style.display='none'"/>
+        <div id="div1">
+            为了您的安全
+        </div>
+
+        <br>
+
+        <div id="div2" onmouseover="toGreen()" onmouseout="toRed()">
+        </div>
+
+        <br>
+
+        <input type="button" value="皮肤1" onclick="skin1()">
+        <input type="button" value="皮肤2" onclick="skin2()">
+
+        <br>
+
+        <input type="button" value="显示隐藏" onclick="showHide()">
+        <div id="div3">
+            aaaa
+        </div>
+
+        <br>
+
+        <input id="div4" type="button" value="变色按钮">
+
+        <br>
+
+        <div class="class1"></div> <div class="class1"></div>
+        <div class="class1"></div> <div class="class1"></div>
+        
+        <br>
+
+        <div id="div5">
+            <input type="button" value="全选">
+            <input type="button" value="不选">
+            <input type="button" value="反选">
+            <br>
+        </div>
+        <div id="div6">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+        </div>
+
+        <br>
+
+        <div id="div7">
+            <input type="button" value="升学">
+            <input type="button" value="工作">
+            <input type="button" value="出国">
+            <br>
+            <div>点击上面选项</div>
+
+        </div>
+    </body>
+</html>

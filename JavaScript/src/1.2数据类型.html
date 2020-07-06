@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>数据类型</h1>
+<script>
+// typeof
+
+console.log(typeof 123); // "number"
+console.log(typeof '123'); // "string"
+console.log(typeof false); // "boolean"
+function f() {} console.log(typeof f); //"function"
+console.log(typeof undefined); //"undefined"
+/**
+ * typeof window在浏览器中是"object"，在vs中不是浏览器环境，没有这个window对象
+ * if（typeof window！=='undefined'）的用途是什么:https://stackoverflow.com/questions/32598971/whats-the-purpose-of-if-typeof-window-undefined
+ */
+console.log(typeof window); 
+var a = []; var b = {}; 
+console.log(typeof a); console.log(typeof b);
+console.log(typeof null);
+
+// JavaScript 语言的底层根本没有整数，所有数字都是小数,组成原理中的754标准
+if(0.1 + 0.2 === 0.3){
+    console.log("true");
+}else{
+    console.log("false"); //执行
+}
+
+//字符串转换成数值
+console.log(parseInt("3.14a"))
+console.log(parseFloat("3.14a"))
+
+
+//对象
+var tmp = {
+    a: 1,
+    p: function (x) {
+      return 2 * x;
+    }
+  };
+console.log(tmp.a); 
+console.log(tmp["a"]); 
+console.log(Object.keys(tmp));
+delete tmp.a;
+console.log(Object.keys(tmp));
+
+var obj ={
+  a: 1,
+  b: 2,
+  c: function(x){
+    return 2*x;
+  }
+};
+for( var p in obj){
+  console.log("键名：", p);
+  console.log("键值:", obj[p]);
+}
+
+</script>
+</body>
+</html>

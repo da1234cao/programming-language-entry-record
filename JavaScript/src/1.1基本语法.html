@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #div1 {width: 200px;height: 100px;background:#ccc; 
+        border: solid #999; display: none;}
+    </style>
+</head>
+
+
+<body>
+<script>
+// 变量可以改变类型
+var a = 1;
+a= "hello";
+console.log(a);
+
+// JavaScript 的区块不构成单独的作用域
+function tmp(str){
+    b = "world"
+    console.log(str + "world");
+}
+tmp("heihei");
+console.log(b);
+
+// 标签,有些奇怪哈。
+// 跳出范围：break label > continue label = break > contionue
+top:
+for(c =0;c<3;c++){
+    for(d=0;d<3;d++){
+        if(c===1 && d===1) break top;
+        console.log("c=%d d=%d",c,d);
+    }
+}
+console.log("hello world");
+
+top:
+for(c =0;c<3;c++){
+    for(d=0;d<3;d++){
+        if(c===1 && d===1) continue top;
+        console.log("c=%d d=%d",c,d);
+    }
+}
+console.log("hello world");
+
+/****************************************/
+</script>
+
+
+<input type="checkbox" onmouseover="alert('a')"/>
+<div id="div1">
+    为了您的信息安全
+</div>
+
+</body>
+</html>
