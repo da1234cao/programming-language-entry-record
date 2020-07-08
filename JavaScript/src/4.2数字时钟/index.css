@@ -1,0 +1,11 @@
+body{
+    background-image: url("./images/bg.png");
+}
+
+#time,#clock,#date{
+    font-size: 50px;
+    font-weight: bolder;
+    color: #ffffff;
+    width: 50%; margin: 0 auto;
+    text-align: center;
+}

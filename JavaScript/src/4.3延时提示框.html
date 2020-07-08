@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            div { float: left; margin: 10px;}
+            #div1 {width: 100px; height: 100px; background-color: chartreuse;}
+            #div2 {width: 150px; height: 150px; background-color: yellow; display: none;}
+        </style>
+
+        <script>
+            window.onload = function(){
+
+                var odiv1 = document.getElementById("div1");
+                var odiv2 = document.getElementById('div2');
+                var timer=null;
+
+                odiv1.onmouseover = function(){
+                    clearTimeout(timer);
+                    display_div2();
+                } 
+                odiv1.onmouseout = function(){
+                    timer = setTimeout(disappear_div2,500);//延时1秒后执行
+                    // console.log(typeof(timer));
+                    // console.log(timer);
+                } 
+               
+                odiv2.onmouseover = function(){
+                    clearTimeout(timer);
+                    display_div2();
+                }
+                odiv2.onmouseout = function(){
+                    timer = setTimeout(disappear_div2,500);
+                }
+                
+                function display_div2(){
+                    odiv2.style.display = 'block';
+                }
+
+                function disappear_div2(){
+                    odiv2.style.display = 'none';
+                }
+            }
+        </script>
+
+    </head>
+
+    <body>
+        <div id="div1">查看当前好友</div>
+        <div id="div2">
+            你的好友列表<br>
+                小草<br>
+                中草<br>
+                大草<br>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            * { padding: 0; margin: 0; }
+            #left_right {width: 50%; margin: 50px auto; text-align: center;}
+            #div1 {margin: 100px auto;position: relative;width: 768px;height: 156px; overflow: hidden;}
+            #div1 ul {position: absolute; top: 0; left: 0;}
+            #div1 ul li {float: left;width: 250px;height: 150px;margin: 3px; text-align: center;list-style: none;}
+        </style>
+        <script>
+            window.onload = function(){
+                var odiv = document.getElementById('div1');
+                var oul = odiv.getElementsByTagName('ul')[0];
+                var oli = oul.getElementsByTagName('li');//由于上面li内容翻倍，所以ul的长度也得翻倍。
+                oul.innerHTML = oul.innerHTML + oul.innerHTML;
+                // oul.style.width = oli.length*oli[0].offsetWidth + 'px';
+                oul.style.width = oul.offsetWidth*2 + 'px'; //ta的大小有li的个数决定。。
+
+                var speed = -3;
+                var timer = null;
+                timer = setInterval(move,30);
+            
+                function move(){
+                    if(oul.offsetLeft < -oul.offsetWidth/2){
+                        oul.style.left = '0';
+                    }
+                    oul.style.left = oul.offsetLeft + speed + 'px';
+                    if(oul.offsetLeft > 0){
+                        oul.style.left = -oul.offsetWidth/2 + 'px';
+                    }
+                }
+
+                odiv.onmouseover = function(){
+                    clearInterval(timer);
+                }
+                odiv.onmouseout = function(){
+                    timer = setInterval(move,30);
+                }
+
+                oleft_right = document.getElementById('left_right');
+                obuttons = oleft_right.getElementsByTagName('input');
+                obuttons[0].onclick = function(){
+                    if(this.value = "向左")
+                        speed = -3;
+                }
+                obuttons[1].onclick = function(){
+                    if(this.value = "向右")
+                        speed = 3;
+                }
+            }
+
+
+        </script>
+    </head>
+    <body>
+        <div id='left_right'>
+            <input type="button" value="向左">
+            <input type="button" value="向右">
+        </div>
+        <div id='div1'>
+            <ul>
+                <li><img src="./images/1.jpg"></li>
+                <li><img src="./images/2.jpg"></li>
+                <li><img src="./images/3.jpg"></li>
+            </ul>
+       </div>
+    </body>
+</html>

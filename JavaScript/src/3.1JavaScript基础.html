@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #calculator {color: green;font-weight: bold;}
+        </style>
+        <script>
+
+            add = function(){
+                var result = 0;
+                for(var i=0; i<arguments.length; i++){
+                    result += arguments[i];
+                }
+                return result;
+            }
+            alert(add(3,4,5));
+
+            window.onload = function(){
+                // var oCalculator = document.getElementById('calculator');
+                // 上面这个触发不是针对按钮，范围内点击都会触发。
+                // console.log(typeof(oCalculator))
+                // console.log(oCalculator)
+                // console.log(Object.key(oCalculator))
+                // var addend1 = oCalculator.getElementsById('addend1').value;
+                // var addend2 = oCalculator.getElementById('addend2').value;
+                // var result = oCalculator.getElementById('result').value;
+                // 上面那样用不行，提示该对象中，没有这个方法。。
+                var oCalculator_equal = document.getElementById('equal');
+                oCalculator_equal.onclick = function(){
+                    var addend1 = document.getElementById('addend1').value;
+                    var addend2 = document.getElementById('addend2').value;
+                    var result = document.getElementById('result');
+                    result.value = (parseFloat(addend1) + parseFloat(addend2));
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <div id="calculator">
+            Addition calculator<br>
+            <input id="addend1" type="text">
+            +
+            <input id="addend2" type="text">
+            <br>
+            <input id="equal" type="button" value="等于">
+            <input id="result" type="text">
+        </div>
+    </body>
+</html>
