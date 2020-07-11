@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            window.onload = function(){
+                oul1 = document.getElementById('ul1');
+                
+                /****************子节点查看**********************/
+                // //第一种修改方式，本身直接修改
+                // oli = oul1.getElementsByTagName('li');
+                // for(var i = 0; i < oli.length; i++){
+                //     oli[i].style.background = 'red';
+                // }
+
+                // 第二种方法，找到所有子节点，去处文本节点
+                // alert(oul1.childNodes.length)
+                // for(var i = 0; i < oul1.childNodes.length; i++){
+                //     // alert(oul1.childNodes[i].nodeType) //text节点type=3，标签节点type=1
+                //     if(oul1.childNodes[i].nodeType == 1)
+                //         oul1.childNodes[i].style.background = 'orange';
+                // }
+
+                // 第三种方法，直接使用子标签节点
+                // alert(oul1.children.length)
+                for(var i = 0; i < oul1.children.length; i++){
+                    oul1.children[i].style.background = 'yellow';
+                }
+
+                /************添加&&删除子节点*****************/
+                var otext1 = document.getElementById('text1');
+                var obutton1 = document.getElementById('button1');
+                var oul2 = document.getElementById('ul2');
+                var olis = oul2.getElementsByTagName('li');
+
+                obutton1.onclick = function(){
+                    oli_tmp = document.createElement('li');
+                    oli_tmp.innerHTML = otext1.value + "<a href='javascript:;'> 删除</a>";
+                    // oul2.appendChild(oli); //这个是插在后面
+                    if(olis.length>0)
+                        oul2.insertBefore(oli_tmp,olis[0]);
+                    else  // 开始的时候为空
+                        oul2.appendChild(oli_tmp);
+
+                    var oas = oul2.getElementsByTagName('a');
+                    for(var i = 0; i < oas.length; i++){
+                        oas[i].onclick = function(){
+                            oul2.removeChild(this.parentNode);
+                        }  
+                    }
+                }
+
+                // 比较尴尬的是，当执行下面语句的时候，并没有a标签。暂时解决不了。
+                // 目前似乎不能预先操作。它只能创建，删除，或者在已有的上面操作。
+                // 无法在暂时没有，后来有，而设定预先操作。
+                // 为啥在上面写就行呢
+                // var oas = oul2.getElementsByTagName('a');
+                // for(var i = 0; i < oas.length; i++){
+                //     oas[i].onclick = function(){
+                //         oul2.removeChild(this.parentNode);
+                //     }  
+                // }
+                
+
+
+            }
+        </script>
+    </head>
+    <body>
+        <span style="font-size: 20px;">子节点查看</span>
+        <ul id='ul1'>
+            <li>aaa</li>
+            <li>bbb</li>
+            <li>ccc</li>
+            <li>ddd</li>
+        </ul>
+        
+        <span style="font-size: 20px;">添加删除子节点</span><br>
+        <input id='text1' type="text" > 
+        <input id='button1' type="button" value="提交">
+        <ul id="ul2">
+        </ul>
+    </body>
+</html>

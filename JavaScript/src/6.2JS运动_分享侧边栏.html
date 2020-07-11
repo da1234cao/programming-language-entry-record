@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #div1 {
+                width: 150px; height: 200px; background-color: sandybrown;
+                line-height: 60px; font-size: 50px;
+                position: absolute; left: -150px;
+            }
+            #div1 span {
+                width: 20px; height: 60px; background-color: springgreen;
+                line-height: 20px; font-size: 10px;
+                position: absolute; right: -20px;top: 70px; 
+            }
+        </style>
+
+        <script>
+            window.onload = function(){
+                var odiv1 = document.getElementById('div1');
+                
+                odiv1.onmouseover = function(){
+                    startMove(0);
+                }
+                odiv1.onmouseout = function(){
+                    startMove(-150);
+                }
+            }
+
+            var timer = null; //如果把这个timer放在函数里面将会发生有意思的事情
+            function startMove(target){
+                /**
+                * 参数target为left属性值
+                * startMove从offsetLeft位置移动到target
+                */
+                var odiv1 = document.getElementById('div1');
+                var speed = 10;
+                // var timer = null; //如果把这个timer放在函数里面将会发生有意思的事情
+
+                //根据offset和target自动判断位置方向
+                var target = parseInt(target);
+                if(odiv1.offsetLeft > target)
+                    speed = -speed;
+
+                if(odiv1.offsetLeft != target){ //这是后加的一行，避免创造不必要的定时器
+                    clearInterval(timer);
+                    timer = setInterval(function() {
+                        //用等号作为判断条件是很不好的，比如上面speed=7，就比较麻烦
+                        // 下面abs是为了解决，少一步不够，多一步超了
+                        // if(odiv1.offsetLeft == target){ 
+                        if(Math.abs(odiv1.offsetLeft - target)<Math.abs(speed)){
+                            clearInterval(timer); //用结束标志进行判断，方便点
+                            odiv1.style.left = target + 'px';
+
+                        }else{
+                            odiv1.style.left = odiv1.offsetLeft + speed + 'px';
+                        }
+                    }, 30);
+                }
+            
+            }
+
+        </script>
+
+    </head>
+
+    <body>
+        <div id='div1'>
+            qq<br>微信<br>微博
+            <span>分享到</span>
+        </div>
+    </body>
+</html>

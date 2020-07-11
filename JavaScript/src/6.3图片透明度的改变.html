@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #div1 {
+                width: 250px;height: 150px;background-image: url('./images/1.jpg'); 
+                float:left; margin: 10px; 
+                opacity: 0.4;
+            }
+            #div1:hover{opacity: 1.0;}
+            #div2 {
+                width: 250px;height: 150px;background-image: url('./images/2.jpg'); 
+                float:left;margin: 10px;
+                opacity: 0.4;
+            }
+        </style>
+
+        <script>
+            window.onload = function(){
+                var odiv2 = document.getElementById('div2');
+                odiv2.onmouseover = function(){
+                    opacity_target(1.0);
+                }
+                odiv2.onmouseout = function(){
+                    opacity_target(0.4);
+                }
+            }
+
+            var timer = null;
+            function opacity_target(target){
+                var odiv2 = document.getElementById('div2');
+                var opacity = parseFloat(getComputedStyle(odiv2,null).opacity);
+                var speed = 0.1;
+                if(target < opacity)
+                    speed = -speed;
+
+                // alert(typeof(getComputedStyle(odiv2,null).opacity));
+                // alert(getComputedStyle(odiv2,null).opacity);
+                // alert(odiv2.style.opacity);
+                
+                clearInterval(timer);
+                timer = setInterval(function() {
+                    //浮点数不好比较，都将其转换成整数
+                    // if(parseInt(opacity*10) == parseInt(target*10))
+                    if(Math.abs(opacity - target) < Math.abs(speed)){
+                        clearInterval(timer);
+                        odiv2.style.opacity = target;
+                    }else{
+                        opacity = opacity + speed;
+                        odiv2.style.opacity = opacity;
+                    }
+                }, 30);
+            }
+
+        </script>
+    </head>
+
+    <body>
+        <span style="text-align: left;font-size: 35px;">分别用css和js控制图片透明度的变化</span>
+        <br>
+        <div id='div1'></div>
+        <div id='div2'></div>
+    </body>
+</html>

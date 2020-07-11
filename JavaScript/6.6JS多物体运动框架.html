@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="./base_move.js" ></script>
+        <style>
+            .class1 {
+                width: 100px;height: 100px;background-color: red;
+                float: left; margin: 10px;
+            }
+            
+        </style>
+            
+        <script>
+            window.onload = function(){
+                var odiv1 = document.getElementById('div1');
+                odiv1.onmouseover = function(){
+                    startMove(this,'height','200px');
+                }
+                odiv1.onmouseout = function(){
+                    startMove(this,'height','100px');
+                }
+
+                var odiv2 = document.getElementById('div2');
+                odiv2.onmouseover = function(){
+                    startMove(this,'width','200px');
+                }
+                odiv2.onmouseout = function(){
+                    startMove(this,'width','100px');
+                }
+
+                var odiv3 = document.getElementById('div3');
+                odiv3.onmouseover = function(){
+                    startMove(this,'opacity','1.0');
+                }
+                odiv3.onmouseout = function(){
+                    startMove(this,'opacity','0.4');
+                }
+
+                var odiv4 = document.getElementById('div4');
+                odiv4.onmouseover = function(){
+                    startMove(this,'font-size','20px');
+                }
+                odiv4.onmouseout = function(){
+                    startMove(this,'font-size','12px');
+                }
+
+                // 边框要单独写个if处理，这里不实现
+                var odiv5 = document.getElementById('div5');
+                odiv5.onmouseover = function(){
+                    //style中没有单独的border-width属性，要配合使用
+                    // odiv5.style.border-width = '20px'; 
+                    odiv5.style.border = '20px solid'
+                    // startMove(this,'border-width','20px');
+                }
+                odiv5.onmouseout = function(){
+                    startMove(this,'border-width','5px');
+                }
+
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="class1" id='div1'>变高</div>
+        <div class="class1" id='div2'>变宽</div>
+        <div class="class1" id='div3' style="opacity: 0.4;">透明度变高</div>
+        <div class="class1" id='div4'>字体变大</div>
+        <!-- <div class="class1" id='div5' style="border: 5px solid;">边框变粗</div> -->
+    </body>
+</html>

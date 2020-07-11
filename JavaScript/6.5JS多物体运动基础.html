@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            div {
+                width: 150px;height: 50px;background-color: red;
+                /* position: absolute;top: 20px;left: 0px; */
+                margin: 20px;
+            }
+        </style>
+
+        <script>
+            window.onload = function(){
+                var odivs = document.getElementsByTagName('div');
+                for(var i = 0; i < odivs.length; i++){
+                    odivs[i].timer = null; //给每一个框框添加一个属性
+
+                    odivs[i].onmouseover = function(){
+                        startMove(this,'300px');
+                    }
+
+                    odivs[i].onmouseout = function(){
+                        startMove(this,'150px');
+                    }
+
+                }
+            }
+
+            function startMove(obj,target){
+                target = parseFloat(target);
+                var odivs = document.getElementsByTagName('div');
+
+                clearInterval(obj.timer);
+                obj.timer = setInterval(function(){
+                    var speed = (target - obj.offsetWidth)/8;
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+                    if(speed == 0 )
+                        clearInterval(obj.timer);
+                    else
+                        obj.style.width = obj.offsetWidth + speed + 'px'; 
+                        //这么写是有问题的，问题在于offsetWidth！=width
+                },30)
+            }
+        </script>
+    </head>
+
+    <body>
+        <div></div>
+        <div></div>
+        <div></div>
+    </body>
+</html>

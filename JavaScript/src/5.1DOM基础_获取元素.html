@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #div1 {width: 200px;height: 200px;background-color: red;position: relative;margin: 0 auto;}
+            #input1 {width: 100px;height: 100px;background-color: white;position: absolute;left: 50px;top: 50px; text-align: center;}
+        </style>
+        <script>
+            window.onload = function(){
+                var odiv1 = document.getElementById('div1');
+                // var oinput1 = odiv1.getElementById('input1'); //id里面不能在取id。。
+                var oinput1 = odiv1.getElementsByTagName('input')[0];
+
+                // alert(oinput1.value); //第一种方式获取元素内容
+
+                // alert(oinput1['value']); //第二种方式获取元素内容
+
+                alert(oinput1.getAttribute('value'))//第三种种方式获取元素内容
+                oinput1.setAttribute('value','white');
+                alert(oinput1.getAttribute('value'))
+                oinput1.removeAttribute('value');
+                alert(oinput1.getAttribute('value'))
+
+            }
+        </script>
+    </head>
+    <body>
+        <div id='div1'>
+            <input id='input1' type="text" value="red">
+        </div>
+    </body>
+</html>

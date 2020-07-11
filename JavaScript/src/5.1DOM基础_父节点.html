@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            /* #div1 {width: 200px;height: 200px;background-color: red;margin: 0 auto;} */
+            #div1 {width: 200px;height: 200px;background-color: red;position: relative;margin: 0 auto;}
+            #div2 {width: 100px;height: 100px;background-color: yellow;position: absolute;left: 50px;top: 50px;}
+        </style>
+        <script>
+            window.onload = function(){
+                /************parentNode使用*****************/
+                odiv3 = document.getElementById('div3');
+                oa = odiv3.getElementsByTagName('a');
+                // alert(oa.length)
+                for(var i = 0; i < oa.length; i++)
+                {
+                    oa[i].onclick = function(){
+                        // this.parentNode.style.dispaly = 'none';   
+                        this.parentNode.style.display = 'none'
+                    }
+                }
+                
+                /********offsetParent与parent的区别***************/
+                // var odiv2 = document.getElementById('div2');
+                // alert(odiv2.offsetParent); //向上找，直到找到可以定位的元素。
+            }
+        </script>
+    </head>
+    <body>
+        <div id='div3' >
+            <li >aaa<a href="javascript:;">隐藏</a></li>
+            <li>bbb<a href="javascript:;">隐藏</a></li>
+            <li>ccc<a href="javascript:;">隐藏</a></li>
+        </div>
+        <div id='div1'>
+            <div id='div2'>
+            </div>
+        </div>
+    </body>
+</html>

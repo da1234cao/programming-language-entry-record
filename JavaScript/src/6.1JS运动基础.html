@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #div1 {
+                width: 100px; height: 100px; background-color: red;
+                position: absolute; top: 50px; left: 0px;
+            }
+        </style>
+
+        <script>
+            window.onload = function(){
+                var oinput1 = document.getElementById('input1');
+                var odiv1 = document.getElementById('div1');
+
+                var speed = 5;
+                var timer = null;
+
+                oinput1.onclick = function(){
+                    clearInterval(timer); //避免多次点击创建多个计时器，清除上一次创建的计时器
+                    timer = setInterval(startMove, 30);
+                }
+
+                function startMove(){
+                    // 移动和停止是两个互斥事件，分开
+                    if(odiv1.offsetLeft >= 300)
+                        clearInterval(timer);
+                    else
+                        odiv1.style.left = odiv1.offsetLeft + speed + 'px';
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <input id='input1' type="button" value="开始移动">
+        <div id='div1'>
+        </div>
+        <div style="width: 2px;height: 400px;background-color: black;position: absolute;left: 400px;"></div>
+    </body>
+</html>
