@@ -1,0 +1,28 @@
+﻿<!doctype html>
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="style/zns_style.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>智能社 - JavaScript 彩虹圈 - www.zhinengshe.com</title>
+<script type="text/javascript" src="js/zns_script.js"></script>
+<script type="text/javascript" src="http://js.tongji.linezing.com/2880049/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/2880049/tongji.gif"/></a></noscript>
+</head>
+
+<body>
+<div id="ctrl_pad">
+	
+	<a class="btn" href="javascript:;" onclick="document.getElementById('ctrl_pad').style.display='none';document.getElementById('show_pad').style.display='block';">↑↑ 收缩</a>
+	<div id="info">
+		<em>可以在屏幕上随便拖拽鼠标，或者点击“自动移动”</em> - FPS:<span id="fps"></span>
+	</div>
+	<input id="auto_play" type="button" value="自动移动" />
+	
+</div>
+<a style="display:none;" id="show_pad" href="javascript:;" onclick="document.getElementById('ctrl_pad').style.display='block';document.getElementById('show_pad').style.display='none';">↓↓ 重新显示</a>
+<div id="bg">
+</div>
+<div id="loading">
+	loading...
+</div>
+</body>
+</html>

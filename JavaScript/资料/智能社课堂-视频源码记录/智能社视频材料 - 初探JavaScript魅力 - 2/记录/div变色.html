@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:200px; background:red;}
+</style>
+<script>
+function setColor(color)
+{
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.style.background=color;
+}
+
+/*
+function toGreen()
+{
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.style.background='green';
+}
+
+function toYellow()
+{
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.style.background='yellow';
+}
+
+function toBlack()
+{
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.style.background='black';
+}
+*/
+</script>
+</head>
+
+<body>
+<input type="button" value="变绿" onclick="setColor('green');" />
+<input type="button" value="变黄" onclick="setColor('yellow');" />
+<input type="button" value="变黑" onclick="setColor('black');" />
+<div id="div1">
+</div>
+</body>
+</html>

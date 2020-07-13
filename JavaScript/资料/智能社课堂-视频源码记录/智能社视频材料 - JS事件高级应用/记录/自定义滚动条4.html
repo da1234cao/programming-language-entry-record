@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#parent {width:600px; height:20px; background:#CCC; position:relative; margin:10px auto;}
+#div1 {width:20px; height:20px; background:red; position:absolute; left:0; top:0;}
+#div2 {width:400px; height:300px; border:1px solid black; overflow:hidden; position:relative;}
+#div3 {position:absolute; left:0; top:0; padding:4px;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv=document.getElementById('div1');
+	var oDiv2=document.getElementById('div2');
+	var oDiv3=document.getElementById('div3');
+	var oParent=document.getElementById('parent');
+	
+	var disX=0;
+	
+	oDiv.onmousedown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		disX=oEvent.clientX-oDiv.offsetLeft;
+				
+		document.onmousemove=function (ev)
+		{
+			var oEvent=ev||event;
+			var l=oEvent.clientX-disX;
+			
+			if(l<0)
+			{
+				l=0;
+			}
+			else if(l>oParent.offsetWidth-oDiv.offsetWidth)
+			{
+				l=oParent.offsetWidth-oDiv.offsetWidth;
+			}
+			
+			oDiv.style.left=l+'px';
+			
+			var scale=l/(oParent.offsetWidth-oDiv.offsetWidth);
+			document.title=scale;
+			
+			oDiv3.style.top=-scale*(oDiv3.offsetHeight-oDiv2.offsetHeight)+'px';
+		};
+		
+		document.onmouseup=function ()
+		{
+			document.onmousemove=null;
+			document.onmouseup=null;
+		};
+		
+		return false;	//chrome、ff、IE9
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="parent">
+	<div id="div1"></div>
+</div>
+<div id="div2">
+	<div id="div3">
+    第一部分: 入门课程、了解JavaScript - 案例+知识点，夯实基础做足准备
+
+*  限于篇幅，大纲只列出部分课上内容和小部分案例
+第1课 初识JavaScript
+JS是什么：大型网站应用效果分析
+JS编写流程：布局、样式、编写代码、测试
+JS中的事件：onclick、onmouseover等
+getElementById获取元素
+用style修改样式
+例子：百度首页下拉列表>>查看
+例子：网站弹出层>>查看
+合并相似代码
+函数的写法、作用
+变量的使用
+className的使用，JS属性和HTML属性
+例子：淘宝网下拉菜单+CSS3简单应用>>查看
+if判断：根据情况，执行不同程序
+例子：收缩展开菜单>>查看
+本课总结：常见JS问题
+本课练习
+第2课 Javascript入门基础
+JS函数传参：怎么传、传什么、哪里用
+传多个参数
+JS中操作属性的第二种方式
+style和className的区别和冲突
+提取行间事件：行为、样式、结构三者分离
+获取元素的第二种方法：getElementsByTagName
+数组的使用
+循环：while循环、自增、for循环
+例子：邮箱常见的全选、反选效果>>查看
+JS基础效果：选项卡>>查看
+利用索引值，关联多组元素
+另一种选项卡：innerHTML的使用>>查看
+本课总结：循环变量陷阱
+本课练习
+申请免费试听 我要报名学习
+第二部分: 基础课程、灵活运用 - 超过100个实用交互课堂演示实例
+
+*  限于篇幅，大纲只列出部分课上内容和小部分案例
+第3课 Javascript基础知识
+JS能做什么、JS不能做什么
+JS组成和功能：DOM、BOM、ECMA
+JS中的变量类型：typeof，常见变量类型
+什么是object类型
+变量类型转换：为什么转换、什么时候转换
+parseInt、parseFloat、Number
+例子：JS实现的简易计算器>>查看
+NaN的作用和检测，什么时候会因为NaN出问题
+显式类型转换和隐式类型转换
+变量作用域，闭包的简单理解
+JS中的命名规范，各种常见前缀的使用
+JS中的运算符
+取模操作的简单应用：隔行变色、简易秒表>>查看
+赋值、比较、逻辑运算符
+运算优先级，括号的使用
+例子：字符串连接的优先级陷阱
+JS中的流程控制：判断、跳出
+什么是真，什么是假：JS中变量的“真假”
+本课总结
+本课练习
+第4课 JavaScript中的定时器
+定时器基础：什么是定时器
+两种定时器的区别
+定时器和循环的区别和转换
+定时器的开启和关闭
+例子：秒表和延时隐藏>>查看
+定时器应用例子：简易数码时钟（文字版、图片版、CSS3版）>>查看
+Date对象的使用，日期和时间的获取
+函数返回值、charAt方法的使用
+定时器应用例子：QQ资料框（延时隐藏、事件合并）>>查看
+定时器应用例子：自动播放的选项卡（计数、越界、暂停）>>查看
+本课总结
+本课练习
+第5课 JS深入、数组、字符串
+arguments的使用
+数据类型的使用：参数、变量、返回值
+currentStyle、getComputedStyle
+JS中兼容问题的处理、工具函数的封装
+Json基础：什么是json，用在什么地方
+Json和数组的区别
+用for in进行Json循环
+字符串方法：substring、分割、比较、大小写
+字符串和字符编码的转换
+数组基础：定义、属性、类型
+数组方法：添加、删除、替换
+数组的排序、拼接和转换
+比较函数的原理和使用
+本课总结：循环变量陷阱
+本课练习
+第6课 DOM、BOM
+DOM节点：子节点、父节点、兄弟节点
+结构父节点和定位父节点
+两种子节点属性的区别
+第三种选择元素的方式——getByClass
+节点的创建：createElement的使用
+节点的插入：appendChild、insertBefore
+节点的删除：removeChild
+节点的替换：replaceChild
+例子：简易JS留言板（无后台版）>>查看
+例子：邮箱附件的上传和删除>>查看
+innerHTML的Bug
+BOM基础：窗体操作（open、close）
+操作子窗体的内容
+关闭窗体的提示问题
+常用的BOM属性、浏览器类型测试
+例子：腾讯图片hash页码的获取和设置>>查看
+可视区的含义和尺寸、滚动距离
+BOM常用事件：onscroll、onresize、IE6检测
+例子：侧边栏悬浮广告及兼容处理>>查看
+本课总结：循环变量陷阱
+本课练习
+第7课 Ajax基础
+服务器客户端交互过程解析
+搭建自己的服务器环境：wamp安装与配置
+什么是Ajax：无刷新数据读取，用途
+异步与同步的区别
+如何使用Ajax：静态文件、动态文件、数据文件
+例子：通过Ajax与后台交互的留言板>>查看
+字符集、编码、数据格式、串联化数据
+什么缓存、如何消除缓存
+GET、POST方式的区别和用途
+结果文件的解析，与DOM配合
+Ajax原理：创建Ajax对象、与服务器交互、事件和属性
+Ajax跨域的原理和应用
+本课总结
+本课练习
+第8课 Ajax应用
+Ajax常用工具函数的编写：数据封装、数据解析、错误处理
+例子：Ajax用户注册和登陆>>查看
+用Jsonp跨域：原理、过程、错误处理、问题
+例子：Jsonp配合后台中转实现百度下拉搜索提示>>查看
+大型Ajax应用的编写：请求管理和自定义消息
+例子：完整的留言板效果（页码、顶踩等功能）>>查看
+例子：通过Ajax与后台交互的留言板>>查看
+本课总结
+本课练习
+申请免费试听 我要报名学习
+第三部分: 中级课程、渐入佳境 - 超过40个大型交互课堂演示实例
+
+第9课 JS事件基础
+JS中的常用事件
+什么是Event对象
+Event对象的兼容性处理
+第二种处理JS兼容性问题的方法
+例子：跟随鼠标的JS提示框>>查看
+事件流，冒泡和捕获，阻止冒泡
+例子：仿Select控件>>查看
+鼠标事件：client属性的使用、滚动条的影响
+封装鼠标位置工具函数
+键盘事件：keyCode的使用
+例子：键盘控制Div的移动>>查看
+键盘事件的其他属性，定义web上的快捷键
+例子：Ctrl+Enter提交留言>>查看
+事件的默认行为、阻止默认事件
+例子：自定义右键菜单>>查看
+例子：简易表单校验（完整版见正则）>>查看
+原生JS编写拖拽：原理、事件、问题
+例子：拖拽拼图>>查看
+本课总结
+本课练习
+第10课 JS事件应用
+事件绑定，工具函数封装
+this的四种常见“错法”
+删除不掉的匿名函数，function的本质
+完美拖拽
+例子：仿百度地图拖拽>>查看
+setCapture的功能和用法
+拖拽的封装和重用
+拖拽高级功能：限制范围、磁性吸附
+碰撞检测：九宫格法、拖拽中的碰撞检测
+例子：拖拽删除元素（回收站）>>查看
+拖拽与DOM配合（仿桌面应用）
+例子：仿QZone拖拽改变板块位置>>查看
+拖拽改变Div大小
+例子：完整的windows窗口（大小、位置、最小化等）>>查看
+原生JS实现自定义滚动条
+例子：用滚动条控制页面元素——大小、透明度、颜色>>查看
+鼠标滚轮事件：事件、属性、兼容
+鼠标滚轮和自定义滚动条配合
+例子：仿优酷推荐视频效果>>查看
+cookie基础：用途、特性、限制
+例子：记住用户名（使用智能社的cookie库）>>查看
+例子：仿许愿墙效果>>查看
+编写cookie库：获取、设置、删除
+封装cookie工具函数
+Date对象的另类用法
+本课总结
+本课练习
+第11课 JS运动动画基础
+运动基础、原理
+运动速度控制
+定时器管理
+例子：jia this“分享到”侧边栏>>查看
+例子：淡入淡出图片>>查看
+缓冲运动：原理、问题
+例子：跟随窗口滑动的小窗口>>查看
+多物体同时运动：多定时器管理
+例子：滑动二级菜单>>查看
+多物体运动框架：参数、属性
+例子：图片幻灯片>>查看
+offset属性的Bug
+扩展运动框架
+浮点数的Bug
+例子：淘宝滑动焦点图>>查看
+例子：手风琴焦点图>>查看
+本课总结
+本课练习
+第12课 JS运动动画中级
+链式运动框架：运动队列
+函数接口
+例子：土豆网联动悬浮菜单>>查看
+例子：仿新浪微博最新消息>>查看
+完美运动框架：参数的传递、运动停止的检测
+例子：伸缩同时淡入淡出的菜单>>查看
+运动框架演变过程分析
+布局转换、层级控制
+例子：多图片展开效果>>查看
+图片预加载、img常用事件
+Image对象的使用
+本课总结
+本课练习
+第13课 正则表达式
+传统字符串操作总结
+什么是正则表达式
+正则表达式相比传统字符串操作的优势
+RegExp对象的创建：JS风格、perl风格
+search配合正则、i选项的使用
+match所有匹配子字符串、g选项的使用
+量词基础：+
+replace配合正则
+例子：论坛关键词过滤>>查看
+字符类：任意、范围、排除、组合
+例子：模拟爬虫抓取>>查看
+元字符、元字符转义
+各种量词的使用：数量、任意、选择
+表单校验实例：邮箱、中文、QQ号等>>查看
+完美版getByClass
+单词边界的使用
+本课总结
+本课练习
+第14课 JS面向对象基础
+什么是面向对象：概念、特点
+面向对象的用途：重用、继承
+面向对象思想：接口、方法
+JS中的对象组成
+this的本质
+为对象添加属性和方法
+工厂方式构建对象
+new的本质和用法
+什么是原型（prototype）
+原型的用法、问题
+混合的面向对象编写方式
+面向对象中的命名规范
+实例：面向对象的选项卡
+如何编写面向对象的程序
+对象和闭包
+本课总
+本课练习
+申请免费试听 我要报名学习
+第四部分: 提高课程、增强工作能力 - 超过40个大型交互课堂演示实例
+    </div>
+</div>
+</body>
+</html>

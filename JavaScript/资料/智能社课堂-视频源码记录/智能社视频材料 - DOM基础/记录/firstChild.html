@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oUl=document.getElementById('ul1');
+	
+	//IE6-8
+	//oUl.firstChild.style.background='red';
+	
+	//高级浏览器
+	//oUl.firstElementChild.style.background='red';
+	
+	if(oUl.firstElementChild)
+	{
+		oUl.firstElementChild.style.background='red';
+	}
+	else
+	{
+		oUl.firstChild.style.background='red';
+	}
+};
+</script>
+</head>
+
+<body>
+<ul id="ul1">
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+</ul>
+</body>
+</html>

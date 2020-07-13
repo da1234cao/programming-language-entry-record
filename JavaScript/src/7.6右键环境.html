@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #div1 {
+                width: 100px;height: 100px; background-color: cornsilk;
+                position: absolute;
+                border:1px solid black; display: none;
+            }
+            #div1 ul {padding: 0px;margin: 0px;}
+            #div1 ul li {padding: 0px;margin: 0px; list-style:none;}
+        </style>
+
+        <script>
+
+            //右键环境菜单
+            document.oncontextmenu = function()  {
+                //右键显示
+                var oDiv1 = document.getElementById('div1');
+                oDiv1.style.display = 'block';
+
+                //菜单显示位置为鼠标位置
+                var pos = getPos();
+                oDiv1.style.left = pos.x + 'px';
+                oDiv1.style.top = pos.y + 'px';
+
+                //点击左键消失:document.onclick
+
+                return false;
+            }
+
+            document.onclick = function(){
+                var oDiv1 = document.getElementById('div1');
+                oDiv1.style.display = 'none';
+            }
+
+            function getPos(){
+                var scollleft = document.documentElement.scrollLeft;
+                var scrollTop = document.documentElement.scrollTop;//火狐
+
+                return {x:event.clientX+scollleft, y:event.clientY+scrollTop};
+            }
+        </script>
+
+    </head>
+    <body>
+        <div id = 'div1'>
+            <span>点击右键弹出菜单，点击左键菜单隐藏;</span>
+            <br><br>
+            <ul>
+                <li>查看源码</li>
+                <li>沙拉翻译</li>
+                <li>另存为</li>
+            </ul>
+        </div>
+    </body>
+</html>

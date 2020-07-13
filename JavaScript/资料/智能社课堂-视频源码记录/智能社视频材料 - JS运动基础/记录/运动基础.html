@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:200px; background:red; position:absolute; top:50px; left:0px;}
+</style>
+<script>
+function startMove()
+{
+	var oDiv=document.getElementById('div1');
+	
+	setInterval(function (){
+		oDiv.style.left=oDiv.offsetLeft+10+'px';
+	}, 30);
+}
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="开始运动" onclick="startMove()" />
+<div id="div1">
+</div>
+</body>
+</html>

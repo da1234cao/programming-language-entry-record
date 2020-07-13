@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>图片滚屏效果 - 智能课堂 - www.zhinengshe.com</title>
+<link href="zns_style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="zns.js">
+</script>
+</head>
+<body>
+<div class="control">
+	<label id="chk_pause"><input type="checkbox" checked="checked">间隔停顿</label>
+	<select id="pause_time">
+		<option value="100">短</option>
+		<option value="1000" selected="selected">中</option>
+		<option value="3000">长</option>
+	</select>
+
+	滚动速度：
+	<select id="sel_speed">
+		<option value="2">慢</option>
+		<option value="5">中</option>
+		<option value="10">快</option>
+	</select>
+</div>
+
+<div class="roll" id="roll">
+    <a href="javascript:void(0);" class="btn_left"></a>
+    <a href="javascript:void(0);" class="btn_right"></a>
+    <div class="wrap">
+        <ul>
+            <li><a href="http://www.zhinengshe.com/"><img src="images/1.jpg" /></a></li>
+            <li><a href="http://www.zhinengshe.com/"><img src="images/2.jpg" /></a></li>
+            <li><a href="http://www.zhinengshe.com/"><img src="images/3.jpg" /></a></li>
+            <li><a href="http://www.zhinengshe.com/"><img src="images/4.jpg" /></a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

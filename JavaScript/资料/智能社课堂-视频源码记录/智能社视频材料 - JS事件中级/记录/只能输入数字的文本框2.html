@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTxt=document.getElementById('txt1');
+	
+	oTxt.onkeydown=function (ev)
+	{
+		var oEvent=ev||event;
+		
+		//alert(oEvent.keyCode);
+		
+		//0-	48
+		//9-	57
+		
+		if(oEvent.keyCode<48 || oEvent.keyCode>57)
+		{
+			return false;
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+<input type="text" id="txt1" />
+</body>
+</html>

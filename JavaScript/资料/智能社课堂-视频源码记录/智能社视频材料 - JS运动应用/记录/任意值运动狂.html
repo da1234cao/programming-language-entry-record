@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div {width:200px; height:200px; margin:20px; float:left; background:yellow; border:10px solid black; filter:alpha(opacity:30); opacity:0.3;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv1=document.getElementById('div1');
+	
+	oDiv1.onmouseover=function ()
+	{
+		startMove(this, 'opacity', 100);
+	};
+	oDiv1.onmouseout=function ()
+	{
+		startMove(this, 'opacity', 30);
+	};
+};
+
+function getStyle(obj, name)
+{
+	if(obj.currentStyle)
+	{
+		return obj.currentStyle[name];
+	}
+	else
+	{
+		return getComputedStyle(obj, false)[name];
+	}
+}
+
+function startMove(obj, attr, iTarget)
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var cur=parseInt(getStyle(obj, attr));
+		
+		var speed=(iTarget-cur)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(cur==iTarget)
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			obj.style[attr]=cur+speed+'px';
+		}
+	}, 30);
+}
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>

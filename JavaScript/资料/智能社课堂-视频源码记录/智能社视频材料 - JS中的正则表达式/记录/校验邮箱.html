@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function ()
+{
+	var oTxt=document.getElementById('txt1');
+	var oBtn=document.getElementById('btn1');
+	
+	oBtn.onclick=function ()
+	{
+		var re=/\w+@[a-z0-9]+\.[a-z]+/i;
+		
+		if(re.test(oTxt.value))
+		{
+			alert('合法的邮箱');
+		}
+		else
+		{
+			alert('你丫写错了');
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+<input type="text" id="txt1" />
+<input type="button" value="校验" id="btn1" />
+</body>
+</html>

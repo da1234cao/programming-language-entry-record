@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* CSS Document */
+* {margin:0; padding:0;}
+body {overflow:hidden; background:url(../images/bg.jpg);}
+#div1 {width:480px; height:316px; position:absolute; left:50%; top:50%; margin-left:-240px; margin-top:-208px;}
+#ul1 {width:100%; height:100%; position:relative; z-index:1;}
+#ul1 li {width:100%; height:100%; background:url(../images/browser.png) center no-repeat; background-size:100%; position:relative; list-style:none; overflow:-hidden; position:absolute; left:0; top:0; -webkit-transform:perspective(1100px) rotateY(0deg);-moz-transform:perspective(1100px) rotateY(0deg);-ms-transform:perspective(1100px) rotateY(0deg);-o-transform:perspective(1100px) rotateY(0deg); z-index:1; opacity:0; box-shadow:0 4px 14px rgba(0,0,0,0.6); -webkit-transition:1s all ease;-moz-transition:1s all ease;-ms-transition:1s all ease;-o-transition:1s all ease; cursor:pointer;}
+#ul1 .cur {z-index:4; opacity:1; -webkit-transform:scale(1);-moz-transform:scale(1);-ms-transform:scale(1);-o-transform:scale(1); z-index:99;}
+#ul1 .active {z-index:4; opacity:1; -webkit-transform:translateY(40px) scale(2);-moz-transform:translateY(40px) scale(2);-ms-transform:translateY(40px) scale(2);-o-transform:translateY(40px) scale(2); z-index:99;}
+#ul1 .left, #ul1 .right {z-index:3; opacity:0.9;}
+#ul1 .left2, #ul1 .right2 {z-index:2; opacity:0;}
+
+#ul1 .left {
+	-webkit-transform:perspective(1100px) translate(-300px, 10px) rotateY(60deg) scale(0.9);
+	-moz-transform:perspective(1100px) translate(-300px, 10px) rotateY(60deg) scale(0.9);
+	-ms-transform:perspective(1100px) translate(-300px, 10px) rotateY(60deg) scale(0.9);
+	-o-transform:perspective(1100px) translate(-300px, 10px) rotateY(60deg) scale(0.9);
+}
+#ul1 .right {
+	-webkit-transform:perspective(1100px) translate(300px, 10px) rotateY(-60deg) scale(0.9);
+	-moz-transform:perspective(1100px) translate(300px, 10px) rotateY(-60deg) scale(0.9);
+	-ms-transform:perspective(1100px) translate(300px, 10px) rotateY(-60deg) scale(0.9);
+	-o-transform:perspective(1100px) translate(300px, 10px) rotateY(-60deg) scale(0.9);
+}
+#ul1 .left2 {
+	-webkit-transform:perspective(1100px) translate(-400px, 10px) rotateY(60deg) scale(0.9);
+	-moz-transform:perspective(1100px) translate(-400px, 10px) rotateY(60deg) scale(0.9);
+	-ms-transform:perspective(1100px) translate(-400px, 10px) rotateY(60deg) scale(0.9);
+	-o-transform:perspective(1100px) translate(-400px, 10px) rotateY(60deg) scale(0.9);
+}
+#ul1 .right2 {
+	-webkit-transform:perspective(1100px) translate(400px, 10px) rotateY(-60deg) scale(0.9);
+	-moz-transform:perspective(1100px) translate(400px, 10px) rotateY(-60deg) scale(0.9);
+	-ms-transform:perspective(1100px) translate(400px, 10px) rotateY(-60deg) scale(0.9);
+	-o-transform:perspective(1100px) translate(400px, 10px) rotateY(-60deg) scale(0.9);
+}
+
+#ul1 li img {position:absolute; width:480px; height:260px; left:0; top:42px;}
+
+#ul1 li span {width:100%; height:100%; background:url(../images/browser.png) center no-repeat; position:absolute; left:0; bottom:-322px; transform-origin:bottom; -webkit-transform:scaleY(-1);-moz-transform:scaleY(-1);-ms-transform:scaleY(-1);-o-transform:scaleY(-1);opacity:0.5;filter:alpha(opacity=50);}
+
+#ul1 li span em {position:absolute; width:100%; height:100%; background:-webkit-linear-gradient(top, rgba(255,255,255,1) 50%, rgba(255,255,255,0)); z-index:2; left:0; top:0;}
+
+#div1 .btn { position:absolute; width:100%; height:22px; text-align:center; left:0; top:-42px; z-index:2;}
+#div1 .btn a {width:22px; height:22px; background:url(../images/arrows.png) no-repeat; display:inline-block; -webkit-transform:scale(1); -webkit-transition:0.5s all ease;-moz-transform:scale(1); -moz-transition:0.5s all ease; -ms-transform:scale(1); -ms-transition:0.5s all ease;opacity:0.7;-o-transform:scale(1); -o-transition:0.5s all ease;filter:alpha(opacity=70);}
+#div1 .btn a:hover {-webkit-transform:scale(1.4); opacity:1;}
+#div1 .btn .prev {background-position:left;}
+#div1 .btn .next {background-position:right;}
+
+#info {width:0px; position:absolute; right:0; top:0; background:#CCC; z-index:99; -webkit-transition:1s all ease;-moz-transition:1s all ease;-ms-transition:1s all ease;-o-transition:1s all ease;border-radius:0 0 0 5px;}
+#info:hover {width:200px;}
+#info div {width:180px; padding:10px;}
+#info span {position:absolute; left:-20px; width:20px; text-align:center; line-height:30px; font-size:16px; background:#CCC; border-radius:0 0 0 5px;}

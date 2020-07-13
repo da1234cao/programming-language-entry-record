@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            window.onload = function(){
+                var oInput = document.getElementsByTagName('input')[0];
+                oInput.onkeydown = function(){
+
+                    //未添加左右控制光标/home/dacao/下载/PPT+源码/智能社课堂-视频源码记录/智能社视频材料 - JS事件中级/记录/拖拽4.html
+
+                    // 0-	48
+		            // 9-	57
+                    // 退格- 8
+                    // 非数字，退格，无法输入
+                    if(event.keyCode !=8 && (event.keyCode < 48 || event.keyCode > 57))
+                        return false;
+                    
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <input type="text"> 
+        <span style="background-color: yellow;">只能输入数字</span>
+    </body>
+</html>

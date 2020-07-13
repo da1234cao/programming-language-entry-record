@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #div1 input {background-color: white;}
+            #div1 input.active {background-color: yellow;}
+            #div1 div {width: 200px;height: 200px;background-color: gray;display: none; font-size: 20px;}
+        </style>
+    </head>
+
+    <script>
+        window.onload = function(){
+            var oDiv1 = document.getElementById('div1');
+            var aButs = oDiv1.getElementsByTagName('input');
+            var aDivs = oDiv1.getElementsByTagName('div');
+
+            for(var i = 0; i < aButs.length; i++){
+                //给该按钮添加一个属性
+                aButs[i].index = i;
+
+                //给每一个按钮添加事件
+                aButs[i].onclick = function(){
+                    //点击任何一个按钮，先让所有按钮的颜色为白色，所有div都隐藏
+                    for(var j = 0; j < aButs.length; j++){
+                        aButs[j].className = "";
+                        aDivs[j].style.display = 'none';
+                    }
+                    //让该按钮变成设定的颜色
+                    this.className = "active";
+                    aDivs[this.index].style.display = 'block';
+                }
+            }
+        }
+
+    </script>
+
+    <body>
+        <div id='div1'>
+            <input class="active" type="button" value="按钮1">
+            <input type="button" value="按钮2">
+            <input type="button" value="按钮3">
+            <div style="display: block;">aaa</div>
+            <div>bbb</div>
+            <div>ccc</div>
+        </div>
+    </body>
+</html>

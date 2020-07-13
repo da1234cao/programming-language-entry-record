@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            div {
+                width: 50px;height: 50px;background-color: red;
+                position: absolute;left: 200px;top: 200px;
+            }
+        </style>
+
+        <script>
+            window.onkeydown = function(){
+                alert(event.keyCode);
+                // 左键：37；右键：39；上键：38；下键：40；回车：13
+
+                var odiv = document.getElementsByTagName('div')[0];
+                switch(event.keyCode){
+                    case 37:
+                        odiv.style.left = odiv.offsetLeft - 10 + 'px';
+                        break;
+                    case 38:
+                        odiv.style.top = odiv.offsetTop - 10 + 'px';
+                        break;
+                    case 39:
+                        odiv.style.left = odiv.offsetLeft + 10 + 'px';
+                        break;
+                    case 40:
+                        odiv.style.top = odiv.offsetTop + 10 + 'px';
+                        break;
+                }
+
+            }
+        </script>
+    </head>
+
+    <body>
+        
+        <div>通过”上下左右“移动</div>
+    </body>
+</html>

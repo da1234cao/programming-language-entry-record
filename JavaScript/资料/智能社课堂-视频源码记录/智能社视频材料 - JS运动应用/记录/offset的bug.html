@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width:200px; height:200px; background:red; border:1px solid black;}
+</style>
+<script>
+setInterval(function (){
+	var oDiv=document.getElementById('div1');
+	
+	oDiv.style.width=oDiv.offsetWidth-1+'px';
+}, 30);
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>

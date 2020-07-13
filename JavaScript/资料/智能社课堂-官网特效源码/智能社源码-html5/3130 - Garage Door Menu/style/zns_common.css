@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* CSS by zns */
+*{margin:0; padding:0}
+a{text-decoration:none;}
+body{background:#C1C1C1;}
+.box{width:880px; margin:100px auto; overflow:hidden;}
+.box div{width:200px; height:100px; float:left; overflow:hidden; position:relative;}
+.box div a{position:absolute; left:0; top:0; width:200px; display:block; height:100px;}
+.box div span{display:block; height:100px; width:200px; position:absolute; background:url(../images/window.png) left top repeat-x;}
+.box div em{display:block; width:200px; height:100px; background:#999; position:absolute; text-align:center; line-height:100px; font-family:Verdana; font-style:normal; font-size:30px; color:#FFF; text-shadow:2px 1px 4px #000000; top:0;}
+.box div .a01{background:url(../images/1.jpg) 0 5px no-repeat;}
+.box div .a02{background:url(../images/1.jpg) -200px 5px no-repeat;}
+.box div .a03{background:url(../images/1.jpg) -400px 5px no-repeat;}
+.box div .a04{background:url(../images/1.jpg) -600px 5px no-repeat;}

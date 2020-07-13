@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #div1 input {background-color: white;}
+            #div1 input.active {background-color: yellow;}
+            #div1 div {width: 200px;height: 200px;background-color: gray;display: none; font-size: 20px;}
+        </style>
+    </head>
+
+    <script>
+        window.onload = function(){
+            var oDiv1 = document.getElementById('div1');
+            var switchTable = new SwitchTable(oDiv1);
+            switchTable.click();//开启，类似于start
+        }
+            
+
+        function SwitchTable(oDiv){
+            //属性放在构造函数内
+            this.aButs = oDiv.getElementsByTagName('input');
+            this.aDivs = oDiv.getElementsByTagName('div');
+        }
+
+        SwitchTable.prototype.click = function(){
+            /*传入的oDiv包含相等个数的选项和选项卡*/
+            if(this.aButs.length != this.aDivs.length)
+                alert("选项和选项卡不等");
+
+            var _this = this;
+            for(var i = 0; i < this.aButs.length; i++){
+                //在下面的函数里面i=this.aButs.length+1,所以在外面多一个标记
+                this.aButs[i].index = i; 
+
+                this.aButs[i].onclick = function(){
+                    //在这个函数里面 ，this指向aButs[i],而不是oDiv，所以使用_this
+                    _this.clearStyle(); 
+                    this.className = 'active';
+                    _this.aDivs[this.index].style.display = 'block';
+                } 
+            }
+        };
+
+        SwitchTable.prototype.clearStyle = function(){
+            for(var j = 0; j < this.aButs.length; j++){
+                this.aButs[j].className = "";
+                this.aDivs[j].style.display = 'none';
+            }
+        };
+    </script>
+
+    <body>
+        <div id='div1'>
+            <input class="active" type="button" value="按钮1">
+            <input type="button" value="按钮2">
+            <input type="button" value="按钮3">
+            <div style="display: block;">aaa</div>
+            <div>bbb</div>
+            <div>ccc</div>
+        </div>
+    </body>
+</html>

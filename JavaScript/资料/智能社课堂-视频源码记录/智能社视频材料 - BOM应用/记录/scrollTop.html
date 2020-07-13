@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+document.onclick=function ()
+{
+	//IE、FF
+	//alert(document.documentElement.scrollTop);
+	
+	//chrome
+	//alert(document.body.scrollTop);
+	
+	var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+	
+	alert(scrollTop);
+};
+</script>
+</head>
+
+<body style="height:2000px;">
+</body>
+</html>

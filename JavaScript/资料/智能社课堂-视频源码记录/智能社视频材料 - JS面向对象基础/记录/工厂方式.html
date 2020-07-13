@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function createPerson(name, qq)		//构造函数
+{
+	//原料
+	var obj=new Object();
+	
+	//加工
+	obj.name=name;
+	obj.qq=qq;
+	
+	obj.showName=function ()
+	{
+		alert('我的名字叫：'+this.name);
+	};
+	obj.showQQ=function ()
+	{
+		alert('我的QQ号：'+this.qq);
+	};
+	
+	//出厂
+	return obj;
+}
+
+var obj=createPerson('blue', '258248832');
+
+obj.showName();
+obj.showQQ();
+
+var obj2=createPerson('张三', '45648979879');
+
+obj2.showName();
+obj2.showQQ();
+</script>
+</head>
+
+<body>
+</body>
+</html>

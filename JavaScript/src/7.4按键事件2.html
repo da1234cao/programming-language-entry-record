@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #div1 {
+                width: 50px;height: 50px;background-color: red;
+                position: absolute;left: 300px;top: 200px;
+            }
+            #div2 {
+                width: 50px;height: 50px;background-color: green;
+                position: absolute;left: 200px;top: 200px;
+            }
+        </style>
+
+        <script>
+            window.onload = function(){
+                var direction_red = {
+                    left: 37,
+                    top: 38,
+                    right: 39,
+                    down: 40
+                }; //上键：38；下键：40；左键：37；右键：39；回车：13
+
+                var direction_green = {
+                    left: 65,
+                    top: 87,
+                    right: 68,
+                    down: 83
+                }; //上下左右w:87; s:83; a:65; d:68;
+
+                
+                var odiv1 = document.getElementById('div1');
+                var odiv2 = document.getElementById('div2');
+
+                // setInterval(function(){
+                //     startMove(odiv1,direction_red);
+                // },30)
+                // setInterval(function(){
+                //     startMove(odiv2,direction_green);
+                // },30)
+                startMove(odiv1,direction_red);
+                startMove(odiv2,direction_green);
+                
+            }
+            
+            function startMove(obj,direction_color){
+                var speed = 3;
+                var direction = {
+                    left: false,
+                    top: false,
+                    right: false,
+                    down: false
+                }; //上下左右
+
+                clearInterval(obj.timer);
+                obj.timer = setInterval(function () {
+                    if (direction.left) {
+                        obj.style.left = obj.offsetLeft - speed + 'px';
+                    } else if (direction.top) {
+                        obj.style.top = obj.offsetTop - speed + 'px';
+                    } else if (direction.right) {
+                        obj.style.left = obj.offsetLeft + speed + 'px';
+                    } else if (direction.down) {
+                        obj.style.top = obj.offsetTop + speed + 'px';
+                    }
+                }, 1);
+
+
+                document.onkeydown = function(){
+                    switch (event.keyCode) {
+                        case direction_color.left:
+                            // alert(direction_color.left)
+                            direction.left = true;
+                            break;
+                        case direction_color.top:
+                            direction.top = true;
+                            break;
+                        case direction_color.right:
+                            direction.right = true;
+                            break;
+                        case direction_color.down:
+                            direction.down = true;
+                            break;
+                    }
+                }
+                document.onkeyup = function(){
+                    direction = {
+                        left: false,
+                        top: false,
+                        right: false,
+                        down: false
+                    };
+                }
+                
+            }
+
+        </script>
+    </head>
+
+    <body style="background-color: silver;">
+        <div id='div1'></div>
+        <div id='div2'></div>
+    </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+div {width:200px; height:200px; margin:20px; float:left; background:yellow;}
+</style>
+<script>
+window.onload=function ()
+{
+	var oDiv1=document.getElementById('div1');
+	
+	oDiv1.onmouseover=function ()
+	{
+		startMove(this, 400);
+	};
+	oDiv1.onmouseout=function ()
+	{
+		startMove(this, 200);
+	};
+	
+	var oDiv2=document.getElementById('div2');
+	
+	oDiv2.onmouseover=function ()
+	{
+		startMove2(this, 400);
+	};
+	oDiv2.onmouseout=function ()
+	{
+		startMove2(this, 200);
+	};
+};
+
+function startMove(obj, iTarget)
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var speed=(iTarget-obj.offsetHeight)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(obj.offsetHeight==iTarget)
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			obj.style.height=obj.offsetHeight+speed+'px';
+		}
+	}, 30);
+}
+
+function startMove2(obj, iTarget)
+{
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		var speed=(iTarget-obj.offsetWidth)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(obj.offsetWidth==iTarget)
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			obj.style.width=obj.offsetWidth+speed+'px';
+		}
+	}, 30);
+}
+</script>
+</head>
+
+<body>
+<div id="div1">变高</div>
+<div id="div2">变宽</div>
+</body>
+</html>
