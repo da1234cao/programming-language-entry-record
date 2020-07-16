@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            #div1 h1 {color: blue;}
+            #div1 table {border: 0px;}
+            #div1 table th {width: 150px; text-align: center; background-color: #cccccc;}
+            #div1 table tr td {width: 150px; }
+        </style>
+    </head>
+
+    <body>
+        <div id='div1'>
+            <h1>订单</h1>
+            <form action="./processorder.php" method="POST">
+                <table>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <tr>
+                        <td>Tires</td>
+                        <td>
+                            <input type="text"  maxlength="3" name='tireqty'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Oil</td>
+                        <td>
+                            <input type="text"  maxlength="3" name='oilqty'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Spark Plugs</td>
+                        <td>
+                            <input type="text"  maxlength="3" name='sparkqty'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>How did you find Bob's?</td>
+                        <td><select name="find">
+                        <option value = "a">I'm a regular customer</option>
+                        <option value = "b">TV advertising</option>
+                        <option value = "c">Phone directory</option>
+                        <option value = "d">Word of mouth</option>
+                        </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='2' style="text-align: center;">
+                            <input type="submit" value="Submit Order">
+                        </td>
+                    </tr>    
+                </table>
+            </form>
+        </div>
+    </body>
+</html>
