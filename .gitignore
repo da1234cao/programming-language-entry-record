@@ -5,4 +5,6 @@
 
 
 ### Java不上传内容
-./Java/*/*.class
+# ./Java/*/*.class,这样写为啥不行呐
+# ./Java/tutorial/*.class
+./Java/*.class
