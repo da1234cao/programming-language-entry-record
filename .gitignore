@@ -5,6 +5,6 @@
 
 
 ### Java不上传内容
-# ./Java/*/*.class,这样写为啥不行呐
-# ./Java/tutorial/*.class
-./Java/*.class
+# *.class # 这个阔以
+# ./Java/**/*.class # 这个不阔以，为啥子呢
+Java/**/*.class
