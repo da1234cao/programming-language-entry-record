@@ -92,3 +92,16 @@ $ cp -r webapps.dist/* webapps/
 $ sudo docker commit --author "dacao" --message "修改默认主页" tomcat01 tomcat01:1.0
 ```
 
+
+
+## centos的镜像构建 -- 略
+
+docker hub 中 centos 地址：https://hub.docker.com/_/centos
+
+```shell
+# 发现centos中的镜像缺少一些命令
+
+```
+
+
+
