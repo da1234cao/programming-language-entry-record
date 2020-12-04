@@ -5,7 +5,7 @@ import setuptools
 with open("README.md", "rb") as fh:
     long_description = fh.read().decode('utf-8')
 
-# See https://packaging.python.org/tutorials/packaging-projects/ for details
+# [Packaging Python Projects](https://packaging.python.org/tutorials/packaging-projects/)
 setuptools.setup(
     name="fuzzingbook",
     version="0.0.1",
