@@ -10,3 +10,6 @@
 # *.class # 这个阔以
 # ./Java/**/*.class # 这个不阔以，为啥子呢
 Java/**/*.class
+
+### fuzzing中不上传的内容
+fuzzing/**/__pycache__
