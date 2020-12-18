@@ -13,3 +13,6 @@ Java/**/*.class
 
 ### fuzzing中不上传的内容
 fuzzing/**/__pycache__
+
+### docker中不上传的内容
+docker/**/chroot
