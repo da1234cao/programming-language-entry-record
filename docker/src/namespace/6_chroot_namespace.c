@@ -15,6 +15,7 @@
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/mount.h>
 
 /* 定义一个给 clone 用的栈，栈大小1M */
 #define STACK_SIZE (1024*1024)
@@ -34,7 +35,7 @@ int container_main(void* agr){
         perror("chdir|chroot");
     }
 
-    // 对从父进程复制过来的mount namespace 修改
+    // 挂载proc文件系统
     if (mount("proc", "/proc", "proc", 0, NULL) !=0 ) {
         perror("proc");
     }
