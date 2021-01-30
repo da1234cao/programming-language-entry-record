@@ -30,7 +30,7 @@
 
 请看以下这个类图，类之间的关系是我们需要关注的：
 
-![uml_class_struct](4.1UML图.assets/uml_class_struct.jpeg)
+![uml_class_struct](UML图.assets/uml_class_struct.jpeg)
 
 - 车的类图结构为\<\<abstract\>\>，表示车是一个抽象类；
 - 它有两个继承类：小汽车和自行车；它们之间的关系为实现关系，使用带空心箭头的虚线表示；
@@ -42,7 +42,7 @@
 
 好多箭头，记不得；可以参考下图标识。
 
-![UML图表示](4.1UML图.assets/UML图表示.gif)
+![UML图表示](UML图.assets/UML图表示.gif)
 
 <br>
 
@@ -73,7 +73,7 @@ end note
 @enduml
 ```
 
-![1_introduce_software_test](4.1UML图.assets/1_introduce_software_test.png) 
+![1_introduce_software_test](UML图.assets/1_introduce_software_test.png) 
 
 ### 模糊测试介绍
 
@@ -141,7 +141,7 @@ end note
 
 ```
 
-![2_break_thing_with_random_input](4.1UML图.assets/2_break_thing_with_random_input.png)
+![2_break_thing_with_random_input](UML图.assets/2_break_thing_with_random_input.png)
 
 ### 代码覆盖率简介
 
@@ -173,7 +173,7 @@ end note
 @enduml
 ```
 
-![3_code_coverage](4.1UML图.assets/3_code_coverage.png)
+![3_code_coverage](UML图.assets/3_code_coverage.png)
 
 <br>
 
