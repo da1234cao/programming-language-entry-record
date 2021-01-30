@@ -1,0 +1,23 @@
+@startuml 3_code_coverage
+class Coverage{
+    _trace[]
+    origin_trace_function
+    __init__self
+    __enter__(self)
+    traceit(self,frame,event,arg)
+    __exit__(self,exc_type, exc_value, tb)
+    trace(self)
+    coverage(self)
+}
+note right of Coverage
+    这个类写的很好
+    _trace[]用来存储代码运行过程中的函数名和行号
+    _trace[]属性在__init__方法中添加
+    __enter__方法，获取当前trace函数存入origin_trace_function
+                  settrace为traceit
+    traceit方法，在原来trace函数的基础上，添加记录函数名和行号到_trace[]
+    __exit__方法，还原使用原来的trace函数
+    <b>trace方法</b>,返回_trace[]
+    <b>coverage方法</b>，返回set(_trace[])
+end note
+@enduml

@@ -1,0 +1,16 @@
+@startuml 1_introduce_software_test
+
+class Timer{
+    start_time
+    stop_time
+    __enter__(self)
+    __exit__(self, exc_type, exc_value, tb)
+    elapsed_time(self)
+}
+note right of Timer
+    elapsed_time函数可以计算当前代码的执行时间
+    包含睡眠期间经过的时间
+    无论是否执行了__exit__
+end note
+
+@enduml
