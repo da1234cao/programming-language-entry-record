@@ -32,10 +32,10 @@
 
 # 下面是从efficeng_grammar_fuzzing中复制过来的内容
 
-from Grammars import simple_grammar_fuzzer,is_valid_grammar
-from Grammars import RE_NONTERMINAL, nonterminals, is_nonterminal,exp_string
-from Grammars import START_SYMBOL,EXPR_GRAMMAR
-from Fuzzer import Fuzzer
+from .Grammars import simple_grammar_fuzzer,is_valid_grammar
+from .Grammars import RE_NONTERMINAL, nonterminals, is_nonterminal,exp_string
+from .Grammars import START_SYMBOL,EXPR_GRAMMAR
+from .Fuzzer import Fuzzer
 import random
 from graphviz import Digraph
 import re
