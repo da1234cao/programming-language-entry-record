@@ -177,10 +177,21 @@ class GrammarFuzzer(Fuzzer):
         self.max_nonterminals = max_nonterminals
         self.disp = disp
         self.log = log
-        self.check_grammar(grammar)
+        self.check_grammar()
 
-    def check_grammar(self,grammar):
-        return is_valid_grammar(grammar)
+    # def check_grammar(self):
+    #     return is_valid_grammar(self.grammar)
+    # 上面是我初始时候写的。没有下面的好。
+    def check_grammar(self):
+        assert self.start_symbol in self.grammar
+        assert is_valid_grammar(
+            self.grammar,
+            start_symbol=self.start_symbol,
+            supported_opts=self.supported_opts())
+
+    def supported_opts(self):
+        # 这里留下个支持opt的接口。
+        return set()
 
     def expansion_to_children(self,expansion):
         # 将文法中，某个symble对应的expansions中的一个expansion转换成，一个tuple作为元素的list
@@ -405,8 +416,8 @@ class GrammarFuzzer(GrammarFuzzer):
 
 ################ 用以生成模糊测试的输入
 class GrammarFuzzer(GrammarFuzzer):
-    def init_tree(self,symbol=START_SYMBOL):
-        return (symbol,None)
+    def init_tree(self):
+        return (self.start_symbol,None)
 
     def fuzz_tree(self):
         # Create an initial derivation tree
