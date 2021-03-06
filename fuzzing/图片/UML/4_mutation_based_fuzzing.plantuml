@@ -1,0 +1,151 @@
+@startuml 4_mutation_based_fuzzing
+
+' 图片导出参数设置
+' scale max 1024 width
+' scale max 800 height
+' scale 3840×2400
+
+''''''' 基本的框架 ''''''''''''''
+
+class Runner{
+    PASS = "PASS"
+    FAIL = "FAIL"
+    UNRESOLVED = "UNRESOLVED"
+    __init__(self)
+    (inp, self.UNRESOLVED) run(self,inp)
+}
+note right of Runner
+    Runner为基类（不是抽象类）
+    使用inp作为输入
+    返回结果和三种结果状态中的一种
+    此时init和run方法啥也没干
+end note
+
+
+class ProgramRunner{
+    program
+    __init__(self,program)
+    run_process(self,inp="")
+    (result,outcome) run(self,inp="")
+}
+Runner <|-- ProgramRunner
+note right of ProgramRunner
+    ProgramRunner类继承Runner类
+    init方法读取将要运行的程序名
+    run方法读取输入，并调用run_process,将输入传递给run_process
+    run_process使用子进程运行程序
+end note
+
+
+class Fuzzer{
+    __init__(self)
+    string fuzz(self)
+    (result,outcome) run(self,runner=Runner())
+    (result,outcome)[] runs(self,runner=PrintRunner(),trials)
+}
+Fuzzer ..> Runner
+note right of Fuzzer
+    Fuzzer是一个基础类
+    fuzz方法生成测试的输入内容
+    run方法使用Runner类生成的一个对象来运行被测试程序；
+        被测试的程序使用fuzz方法生成的内容作为输入
+    runs方法多次调用run方法，调用次数为trials
+end note
+
+class RandomFuzzer{
+    __init__(self, min_length, max_length,char_start, char_range)
+    string fuzz(self)
+}
+RandomFuzzer --|> Fuzzer
+note left of RandomFuzzer
+    RandomFuzzer继承Fuzzer类
+    init方法读取参数：随机字符串的最小长度、最大长度、字符的开始值、字符的最大值
+    fuzz根据参数的限制，随机生成字符串
+end note
+
+
+''''''''''' 代码覆盖率 ''''''''''
+
+class Coverage{
+    _trace[]
+    origin_trace_function
+    __init__self
+    __enter__(self)
+    traceit(self,frame,event,arg)
+    __exit__(self,exc_type, exc_value, tb)
+    trace(self)
+    coverage(self)
+}
+note right of Coverage
+    这个类写的很好
+    _trace[]用来存储代码运行过程中的函数名和行号
+    _trace[]属性在__init__方法中添加
+    __enter__方法，获取当前trace函数存入origin_trace_function
+                  settrace为traceit
+    traceit方法，在原来trace函数的基础上，添加记录函数名和行号到_trace[]
+    __exit__方法，还原使用原来的trace函数
+    <b>trace方法</b>,返回_trace[]
+    <b>coverage方法</b>，返回set(_trace[])
+end note
+
+
+
+''''''''''' 基于突变的模糊测试 '''''''''''''''''
+class MutationFuzzer{
+    seed
+    min_mutations
+    max_mutations
+    population
+    seed_index
+    __init__(self,seed, min_mutations=2,max_mutations=10)
+    reset(self)
+    string mutate(self,inp)
+    string create_candidate(self)
+    string fuzz(self)
+}
+MutationFuzzer --|> Fuzzer
+note right of MutationFuzzer
+    seed存储种子；population初始化为种子，后期添加进突变能发现新覆盖率的输入
+    mutation方法，控制突变方式。
+    create_candidate方法，调用mutation，生成新的输入
+    fuzz先使用种子作为输出，后使用create_candidate生成输出
+end note
+
+class MutationCoverageFuzzer{
+    set() coverages_seen
+    population[]
+    reset(self)
+    run(self, runner)
+}
+note right of MutationCoverageFuzzer
+    run方法的第二个参数，runner对象，需要统计代码覆盖率。
+    当发现新的路径的时候，将当前的输入加入population。
+end note
+
+class FunctionRunner{
+    __init__(self,function)
+    run_function(self,inp)
+    run(self,inp)
+}
+note right of FunctionRunner
+    运行函数的Runner类
+end note
+
+class FunctionCoverageRunner{
+    run_function(self,inp)
+    coverage(self)
+}
+note right of FunctionCoverageRunner
+    run_function的时候，记录代码覆盖情况
+    coverage方法，返回本次执行的代码覆盖情况
+end note
+
+MutationCoverageFuzzer --|> MutationFuzzer
+MutationCoverageFuzzer ..> FunctionCoverageRunner
+FunctionCoverageRunner --|> FunctionRunner
+FunctionCoverageRunner ..> Coverage
+FunctionRunner --|> Runner
+
+
+@enduml
+

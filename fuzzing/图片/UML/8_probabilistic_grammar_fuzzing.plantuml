@@ -1,0 +1,158 @@
+@startuml probabilistic_grammar_fuzzing
+
+' 给语法添加概率功能
+
+' Grammars.py 函数集合
+class Grammars{
+    EXPR_GRAMMAR
+    EXPR_EBNF_GRAMMAR
+    START_SYMBOL="<start>"
+
+    srange(characters)
+    crange(character_start, character_end)
+    nonterminals(expansion)
+    is_nonterminal(s)
+    simple_grammar_fuzzer(grammar, start_symbol=START_SYMBOL,max_nonterminals=10, max_expansion_trials=100,log=False)
+
+    extend_grammar(grammar, extension={})
+    new_symbol(grammar, symbol_name="<symbol>")
+    parenthesized_expressions(expansion)
+    convert_ebnf_operators(ebnf_grammar)
+    convert_ebnf_operators(ebnf_grammar)
+    convert_ebnf_parentheses(ebnf_grammar)
+
+    opts(**kwargs)
+    exp_string(expansion)
+    exp_opts(expansion)
+    exp_opt(expansion, attribute)
+    set_opts(grammar, symbol, expansion, opts=None)
+
+    def_used_nonterminals(grammar, start_symbol=START_SYMBOL)
+    reachable_nonterminals(grammar, start_symbol=START_SYMBOL)
+    unreachable_nonterminals(grammar, start_symbol=START_SYMBOL)
+    opts_used(grammar)
+    is_valid_grammar(grammar, start_symbol=START_SYMBOL, supported_opts=None)
+}
+note right of Grammars
+<b>这并不是一个类，所有内容在Grammars.py</b>
+<b>文法的基础操作</b>
+EXPR_GRAMMAR:表达式的DNF文法
+EXPR_EBNF_GRAMMAR：表达式的扩展的DNF文法
+srange(characters)：将一个str内容，拆分成char 的list
+crange(character_start, character_end)：返回指定范围的字符列表
+nonterminals(expansion)：返回expansion中的所有非终结符
+is_nonterminal(s):判断一个符号是否为非终结符
+simple_grammar_fuzzer():简单的文法生成器
+extend_grammar(grammar, extension={}):对现有文法进行扩展，返回新文法
+<b>EBNF文法的相关函数</b>
+convert_ebnf_parentheses(ebnf_grammar)：将EBNF文法转换成BNF文法
+<b>expansion上的opt选项</b>
+opt选项的初始，获取，设置(添加、修改、删除)
+<b>检查文法的合法性</b>
+is_valid_grammar(grammar, start_symbol=START_SYMBOL, supported_opts=None)
+end note
+
+
+' GrammarsFuzzer类
+class GrammarsFuzzer{
+    dot_escape(s)
+    extract_node(node, id)
+    unicode_escape(s, error="backslashreplace")
+    default_node_attr(dot, nid, symbol, ann)
+    default_edge_attr(dot, start_node, stop_node)
+    default_graph_attr(dot)
+    display_tree(derivation_tree,log=False,extract_node=extract_node,node_attr=default_node_attr,edge_attr=default_edge_attr,graph_attr=default_graph_attr)
+    display_annotated_tree(tree, a_nodes, a_edges, log=False)
+    all_terminals(tree)
+    tree_to_string(tree)
+
+    check_grammar(self)
+    __init__(self, grammar, start_symbol=START_SYMBOL,min_nonterminals=0, max_nonterminals=10, disp=False, log=False)
+    supported_opts(self)
+
+    expansion_to_children(self,expansion)
+    choose_node_expansion(self, node, possible_children)
+    process_chosen_children(self, chosen_children, expansion)
+    expand_node(self, node)
+    expand_node_randomly(self, node)
+    symbol_cost(self, symbol, seen=set())
+    expansion_cost(self, expansion, seen=set())
+    expand_node_by_cost(self, node, choose=min)
+    expand_node_min_cost(self, node)
+    expand_node_max_cost(self, node)
+
+    possible_expansions(self, node)
+    any_possible_expansions(self, node)
+    choose_tree_expansion(self, tree, children)
+    expand_tree_once(self, tree)
+    log_tree(self, tree)
+    expand_tree_with_strategy(self, tree, expand_node_method, limit=None)
+    expand_tree(self, tree)
+
+    init_tree(self)
+    fuzz_tree(self)
+    fuzz(self)
+}
+note right of GrammarsFuzzer
+<b>GrammarsFuzzer.py</b>
+<b>使用点图展示解析树</b>
+display_tree
+<b>拓展节点</b>
+supported_opts(self):留下个支持opt的接口
+expansion_to_children(self,expansion): \n将文法中，某个symble对应的expansions中的一个expansion转换成，一个tuple作为元素的list
+choose_node_expansion(self, node, possible_children): 从可能的孩子中选择一个扩展。默认为随机。
+process_chosen_children(self, chosen_children, expansion)：选择之后的孩子，处理一下。
+<b>基础扩展节点策略</b>
+扩展节点的时候可以选择：使用随机扩展或者扩展的时候考虑最大最小代价。
+<b>扩展树</b>
+随机选择非终极符的叶子进行扩展。叶子扩展的时候，可以有不同的策略。选中策略之后，有不同的处理方式。
+<b>用以生成模糊测试的输入</b>
+fuzz(self):生成解析树，返回解析树的叶子节点。
+end note
+
+
+class ProbabilisticGrammarFuzzer{
+    PROBABILISTIC_EXPR_GRAMMAR
+
+    exp_prob(expansion)
+    set_prob(grammar, symbol, expansion, prob)
+
+    exp_probabilities(expansions, nonterminal="<symbol>")
+    prob_distribution(probabilities, nonterminal="<symbol>")
+    is_valid_probabilistic_grammar(grammar, start_symbol=START_SYMBOL)
+
+    check_grammar(self)
+    supported_opts(self)
+    choose_node_expansion(self, node, possible_children)
+
+    expansion_key(symbol, expansion)
+    __init__(self, parser, log=False)
+    reset(self)
+    add_tree(self, tree)
+    count_expansions(self, inputs)
+    counts(self)
+
+    set_probabilities(self, counts)
+    set_expansion_probabilities(self, symbol, counts)
+    mine_probabilistic_grammar(self, inputs)
+}
+note right of ProbabilisticGrammarFuzzer
+<b>ProbabilisticGrammarFuzzer.py</b>
+<b>传入具体的属性，调用Grammar.py中的方法</b>
+<b>检查概率的一致性</b>
+is_valid_probabilistic_grammar(grammar, start_symbol=START_SYMBOL)
+<b>在节点扩展选择中考虑概率因素</b>
+choose_node_expansion(self, node, possible_children)
+<b>从输入样例中学习概率</>
+__init__(self, parser, log=False) : 使用解析器初始化
+count_expansions(self, inputs) ：统计输入样例中各个expansion出现的次数
+counts(self) ： 返回各个expansion出现的次数
+<b>将学习出来的概率赋值到文法中</b>
+mine_probabilistic_grammar(self, inputs): \n统计输入样例中各个expansion出现的次数,并赋值到文法中，返回包含概率的文法
+end note
+
+GrammarsFuzzer --> Grammars
+GrammarsFuzzer --|> Fuzzer
+ProbabilisticGrammarFuzzer --|> GrammarsFuzzer
+
+@enduml

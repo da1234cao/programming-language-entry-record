@@ -1,3 +1,1 @@
-给本科生助教。助教的一部分内容是fuzzing。他们是真幸福，可以接触这些东西。
-
-我也整理下思路。
+[《The Fuzzing Book》](https://www.fuzzingbook.org/) 阅读过程。
