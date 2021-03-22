@@ -2,11 +2,23 @@
 
 ## 前言
 
+来源：[AUTOTOOLS - John Calcote](https://nostarch.com/autotools.htm) or [AUTOTOOLS – 亚马逊](https://www.amazon.cn/dp/B003WUYEL6/ref=sr_1_1?__mk_zh_CN=亚马逊网站&dchild=1&keywords=autotools&qid=1616146359&sr=8-1)
 
+这里简单整理下这本书的第三章：configure your project with autoconf
+
+书中介绍，循序渐进。
+
+第一步：介绍了autoconf和M4宏，并整体运行了一遍，介绍了相关脚本的调用顺序和文件作用。
+
+第二步：通过autoconf将Makefile中定义为@VARIABLE@的变量替换，并通过VPATH进行远程构建。
+
+第三步：借助autoscan生成configure.ac，并说明文件中的宏含义。
+
+<br>
 
 ### 代码的初始结构
 
-[代码仓库]()，下面的代码在这基础上，不断修改补充。
+[代码仓库](https://github.com/da1234cao/programming-language-entry-record/tree/master/autotools/src/chapter02/jupiter-makefile-ch2)，下面的代码在这基础上，不断修改补充。
 
 ```shell
 ➜  jupiter-makefile-ch2 tree
@@ -17,9 +29,7 @@
     └── Makefile
 ```
 
-
-
-
+<br>
 
 ## 了解autoconf的第一步
 
@@ -118,6 +128,10 @@ configre脚本有三个功能：
 
 ## 了解autoconf的第二步
 
+---
+
+[本节的仓库代码](https://github.com/da1234cao/programming-language-entry-record/tree/master/autotools/src/chapter3/jupiter-autoconf-ch3-02)
+
 现在我们给configure.ac中，添加一些实质内容。
 
 ```shell
@@ -165,4 +179,166 @@ VPATH		= @srcdir@
 其中，VPATH构建是一种使用Makefile结构（VPATH）在源目录以外的目录中配置和构建项目的方法，详细介绍见：[Makefile目标文件搜索（VPATH和vpath）](http://c.biancheng.net/view/7051.html)
 
 VPATH构建，思考下，很容易明白。在其他目录执行configure。根据模板生成的makefile文件在当前目录。
-make 刚生成的makefile文件，由于其中已经定义了VPATH变量。所以很自然的根据VPATH，知道依赖的源码，编译出来的内容在当前目录。从而实现，在非源码目录编译project。
+make 刚生成的makefile文件，由于其中已经定义了VPATH变量。所以很自然的根据VPATH，找到依赖的源码位置，编译出来的内容在当前目录。从而实现，在非源码目录编译project。
+
+<br>
+
+## 了解autoconf的第三步
+
+---
+
+[本节的仓库代码](https://github.com/da1234cao/programming-language-entry-record/tree/master/autotools/src/chapter3/jupiter-autoconf-ch3-03)
+
+此时的代码结构如下
+
+```shell
+.
+├── autogen.sh
+├── autoscan.log
+├── configure.ac
+├── configure.ac.bak
+├── Makefile.in
+└── src
+    ├── main.c
+    └── Makefile.in
+```
+
+我们通过autoscan自动生成configure.scan。configure.scan备份一份为configure.ac.bak。然后，修改configure.scan并为configure.ac。避免完全人工实现configure.ac。
+
+```shell
+# configure.ac内容
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.69])
+AC_INIT([Jupiter], [1.0], [jupiter-bugs@example.org])
+AC_CONFIG_SRCDIR([src/main.c])
+AC_CONFIG_HEADERS([config.h])
+
+# Checks for programs.
+AC_PROG_CC
+AC_PROG_INSTALL
+
+# Checks for libraries.
+
+# Checks for header files.
+AC_CHECK_HEADERS([stdlib.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+
+# Checks for library functions.
+
+AC_CONFIG_FILES([Makefile
+                 src/Makefile])
+AC_OUTPUT
+```
+
+<br>
+
+### autogen.sh
+
+```shell
+# autogen.sh
+#!/bin/sh
+autoreconf --install
+automake --add-missing --copy >/dev/null 2>&1
+```
+
+configure检查到有install的时候，需要install-sh的shell脚本，原因如下。
+
+Autoconf就是关于可移植性的，不幸的是，Unix安装实用程序并不像它可能的那样可移植。 从一个平台到另一个平台，安装功能的关键部分都足以引起问题，因此Autotools提供了一个名为install-sh的shell脚本（不建议使用的名称：install.sh）。 该脚本充当系统自身安装实用程序的包装，掩盖了不同版本的安装之间的重要差异。
+
+但是我们目前没有在autoconf中使用automake。而install是automake的工作，需要它提供install-sh。
+Autoconf不会生成任何makefile构造-只会将变量代入您的Makefile.in模板中。 因此，Autoconf实际上没有理由抱怨缺少installsh脚本。
+
+所以需要上面的autogen.sh。第五章使用automake的时候，直接autoreconf --install就好。
+
+<br>
+
+### configure.ac
+
+1. **AC_PREREQ**：该宏仅定义了可用于成功处理此configure.ac文件的Autoconf的最早版本。GNU Autoconf手册指出AC_PREREQ是在AC_INIT之前可以使用的唯一宏。 这是因为在开始处理任何其他可能依赖于版本的宏之前，请确保已使用足够新版本的Autoconf。
+
+2. **AC_INIT**：顾名思义，AC_INIT宏将初始化Autoconf系统。 这是其原型，如GNU Autoconf手册中所定义：
+   它最多接受五个参数（自动扫描仅使用前三个参数生成一个调用）：程序包，版本以及bugreport，tarname和url（可选）。  package参数应作为程序包的名称。 当您执行make dist时，它将最终（以规范形式）作为Automake生成的发行发行版tarball名称的第一部分。
+
+3. **AC_CONFIG_SRCDIR**：该宏是一个健全性检查。 其目的是确保生成的配置脚本知道执行该脚本对应的项目目录位置。该参数可以是您喜欢的任何源文件的路径（相对于项目的配置脚本）。 您应该选择一个项目唯一的项目，以最大程度地减少configure被误认为其他项目的配置文件本身的可能性。 我尝试选择一种代表项目的文件，例如以定义项目的功能命名的源文件。 这样，万一我决定重新组织源代码，就不太可能在文件重命名中丢失它。 但这并不重要，因为autoconf和configure都会告诉您和您的用户是否找不到此文件。
+
+4. **AC_CONFIG_XXXS** [比如：AC_CONFIG_FILES，AC_CONFIG_HEADERS，AC_CONFIG_COMM]
+
+   这几个宏，可以如下格式表示。
+
+   ```shell
+   AC_CONFIG_XXXS(tag..., [commands], [init-cmds])
+   ```
+
+   这几个宏，tag参数的形式为OUT [：INLIST]，其中INLIST的形式为IN0 [：IN1：...：INn]。 通常，您会看到仅使用一个参数调用这些宏。
+
+   比如，`AC_CONFIG_HEADERS([config.h])`等价于`AC_CONFIG_HEADERS([config.h:config.h.in])`。表示从config.h.in中生成config.h。
+
+   也可以从多个文件中生成一个文件，如下所示。
+
+   ```shell
+   AC_CONFIG_HEADERS([config.h:cfg0:cfg1:cfg2])
+   ```
+
+5. **AC_CONFIG_COMMANDS**：可以认为AC_CONFIG_COMMANDS,在执行config.status，起作用。
+
+   ```shell
+   # 一个configure.ac的测试版本
+   AC_INIT([test], [1.0])  
+   AC_CONFIG_COMMANDS([abc],  
+   　　　　　　　　　[echo "Testing $mypkgname"],  
+   　　　　　　　　　[mypkgname=$PACKAGE_NAME])  
+   AC_OUTPUT  
+   ```
+
+   ```shell
+   $ autoreconf
+   $ ./configure
+   configure: creating ./config.status
+   config.status: executing abc commands
+   Testing test
+   $
+   $ ./config.status
+   config.status: executing abc commands
+   Testing test
+   $
+   $ ./config.status --help
+   'config.status' instantiates files from templates according to the current
+   configuration.
+   Usage: ./config.status [OPTIONS]... [FILE]...
+   ...
+   Configuration commands:
+   abc
+   Report bugs to <bug-autoconf@gnu.org>.
+   $
+   $ ./config.status abc
+   config.status: executing abc commands
+   Testing test
+   $
+   ```
+
+   如你所见，执行configure引起不带命令行选项的config.status被执行。手动执行config.status有相同的效果。在命令行执行config.status并带abc标签，亦是如此。
+
+6. **AC_CONFIG_HEADERS** & **AC_CHECK_HEADERS**
+
+   autoscan扫描之后，configure.ac(configure.scan)中，包含AC_CHECK_HEADERS，表示需要检查头文件是否存在。当包含AC_CHECK_HEADERS，执行autoreconf的时候，会自动调用autoheader。config.h由config.h.in，通过autoheader生成。
+
+   是否包含头文件的判断方式：检查AC_CHECK_HEADERS中包含的头文件，config.h中是否包含。config.h中包含，则检查通过。反之，不通过。
+
+   因为代码中包含的头文件，安装用户的机器中可能没有该头文件。如果运行configure的时候不检查，make编译代码的时候还是会报错。如果必须通过错误来解决问题，那么最好在配置时而不是在编译时这样做。 一般的经验法则是尽早纾困。
+
+<br>
+
+## 总结
+
+总体来说：
+
+0. 将Makefile中，需要替换的部分，通过@VARIABLE@表示
+1. 使用autoscan扫描自动生成configure.scan
+2. 根据需要修改configure.scan内容，并重命名为configure.ac
+3. 之后运行autoreconfig、configure、make、[make install]
+
+这里面比较重要的是理解configure.ac里面宏的含义。
+
