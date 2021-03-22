@@ -23,6 +23,10 @@
 
 ## 了解autoconf的第一步
 
+---
+
+[本节的代码仓库](https://github.com/da1234cao/programming-language-entry-record/tree/master/autotools/src/chapter3/jupiter-autoconf-ch3-01)
+
 这里，我们在初始代码的基础上，添加configure.ac文件。
 
 ```shell
@@ -109,3 +113,56 @@ configre脚本有三个功能：
 [上面功能可以看到，configure生成了config.status，然后调用config.status，省去config.status可以好？]
 
 为什么不configure仅执行它写入config.status的代码，而不是麻烦立即生成第二个脚本，而只是立即调用它呢？ 有几个很好的理由。 首先，执行检查和生成文件的操作在概念上是不同的，并且在概念上不同的操作与单独的make目标相关联时，make的效果最佳。 第二个原因是，您可以分别执行config.status以从其相应的模板文件重新生成输出文件，从而节省了执行那些冗长的检查所需的时间。 最后，编写config.status来记住最初在configure命令行上使用的参数。 因此，当make检测到需要更新构建系统时，它可以使用最初指定的命令行选项调用config.status重新执行配置。
+
+<br>
+
+## 了解autoconf的第二步
+
+现在我们给configure.ac中，添加一些实质内容。
+
+```shell
+# configure.ac
+AC_INIT([Jupiter],[1.0])
+AC_CONFIG_FILES([Makefile src/Makefile])
+AC_OUTPUT
+```
+
+没错，相较于上一节的代码，多了一行。
+
+此行代码假定存在用于Makefile和src/Makefile的模板，分别称为Makefile.in和src/Makefile.in
+
+**这些模板文件看起来与它们的Makefile副本完全相同，但有一个例外：使用@VARIABLE@语法**。
+
+**autoconf替换文本中所有都使用@VARIABLE@语法标记的变量**。
+
+像下面这样修改Makefile为Makefile.in，详细见代码仓库。
+
+```makefile
+# @configure_input@
+
+# package-specific substitution variables
+package = @PACKAGE_NAME@
+version = @PACKAGE_VERSION@
+tarname = @PACKAGE_TARNAME@
+distdir = $(tarname)-$(version)
+
+# prefix-specific substitution variables
+prefix      ?= @prefix@
+exec_prefix = @exec_prefix@
+bindir      = @bindir@
+
+# VPATH-specific substitution variables
+srcdir		= @srcdir@
+VPATH		= @srcdir@
+```
+
+现在可以执行autoreconf，然后执行configure和make，以构建项目。
+
+这个简单的三行configure.ac文件会生成功能完整的configure script。  (autoreconf)、
+
+生成的configure script将运行各种系统检查，并生成config.status脚本，该脚本可以替换此构建系统中[*.in]一组指定模板。
+
+其中，VPATH构建是一种使用Makefile结构（VPATH）在源目录以外的目录中配置和构建项目的方法，详细介绍见：[Makefile目标文件搜索（VPATH和vpath）](http://c.biancheng.net/view/7051.html)
+
+VPATH构建，思考下，很容易明白。在其他目录执行configure。根据模板生成的makefile文件在当前目录。
+make 刚生成的makefile文件，由于其中已经定义了VPATH变量。所以很自然的根据VPATH，知道依赖的源码，编译出来的内容在当前目录。从而实现，在非源码目录编译project。
