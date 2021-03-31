@@ -1,0 +1,33 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.69])
+AC_INIT([Jupiter], [1.0], [jupiter-bugs@example.org])
+AM_INIT_AUTOMAKE
+LT_PREREQ([2.2])
+LT_INIT([dlopen])
+AC_CONFIG_SRCDIR([src/main.c])
+AC_CONFIG_HEADERS([config.h])
+
+# Checks for programs.
+AC_PROG_CC
+AC_PROG_INSTALL
+# AC_PROG_RANLIB
+
+# Checks for libraries.
+AC_SEARCH_LIBS([pthread_create])
+AC_SEARCH_LIBS([dlopen],[dl])
+
+# Checks for header files.
+AC_CHECK_HEADERS([stdlib.h pthread.h dlfcn.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+
+# Checks for library functions.
+
+AC_CONFIG_FILES([Makefile
+                common/Makefile
+                include/Makefile libjup/Makefile
+                src/Makefile
+                src/modules/hithere/Makefile])
+AC_OUTPUT
