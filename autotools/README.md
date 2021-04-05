@@ -6,7 +6,8 @@
 
 视频教程：[Autotools -- youtube](https://www.youtube.com/watch?v=4q_inV9M_us&list=PLVs4_hjgAxYXW9eEvMHohiLVtqdxaDG3j)
 
-遗憾的是，我暂时没有找到比较好的中文教程。我英文阅读有两个问题：长句不好翻译，词汇量太小。因而，英文文档读起来比较慢，效果也不是特别好。再加上三天打鱼两天晒网。目前《AUTOTOOLS -- John Calcote》这本书只看了前七章。了解了autoconf、automake、libtool。后面四章没有看，包含autotools的一个实践案例、m4宏的使用和autotools的一些使用技巧。
+遗憾的是，我暂时没有找到比较好的中文教程。我英文阅读有两个问题：长句不好翻译，词汇量太小。因而，英文文档读起来比较慢，效果也不是特别好。再加上三天打鱼两天晒网。**目前《AUTOTOOLS -- John Calcote》这本书只看了前七章。了解了autoconf、automake、libtool。后面四章没有看，包含autotools的一个实践案例、m4宏的使用和autotools的一些使用技巧。**
 
 今天是清明节放假的最后一天，以此结束autotools的学习阶段。
 
+最后顺便贴上autotools的官网链接：[An Introduction to the Autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html) | [Autoconf](https://www.gnu.org/software/autoconf/) |[Automake](https://www.gnu.org/software/automake/automake.html) | [Libtool](https://www.gnu.org/software/libtool/libtool.html)
