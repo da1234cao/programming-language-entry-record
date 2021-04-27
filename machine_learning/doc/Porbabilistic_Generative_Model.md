@@ -97,7 +97,7 @@ cov = (cov_0 * X_train_0.shape[0] + cov_1 * X_train_1.shape[0]) / (X_train_0.sha
 
 如果不打算转换模型，可以这一步便计算，测试用例属于不同类中的概率，然后选最大值就好。
 
-如果转换模型，计算w和b的话，加上如下代码。这是二分类，所以计算出x在class 1中的概率大于0.5，则属于class 1。否则，则属于class 2。如果是多分类的话，应该还得推导其他的w和b值计算公示。
+如果转换模型，计算w和b的话，加上如下代码。这是二分类，所以计算出x在class 1中的概率大于0.5，则属于class 1。否则，则属于class 2。如果是多分类的话，怎么办？
 
 ```python
 u, s, v = np.linalg.svd(cov, full_matrices=False)
