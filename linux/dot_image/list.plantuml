@@ -1,0 +1,57 @@
+
+
+@startdot hello_list
+digraph R {
+    rankdir=LR
+    node [shape=record];
+
+    node1 [xlabel="head"] [label="<f0> *next|<f1> *prev|<f2> age"];
+    node2 [xlabel="node1"] [label="<f0> *next|<f1> *prev|<f2> age"];
+    node3 [xlabel="node2"] [label="<f0> *next|<f1> *prev|<f2> age"];
+
+    node1:f0 -> node2:n;
+    node2:f0 -> node3:n;
+    node3:f0 -> node1:n;
+    node1:f1 -> node3:n;
+    node2:f1 -> node1:n;
+    node3:f1 -> node2:n;
+}
+@enddot
+
+
+@startdot hello_list_error
+digraph R {
+    rankdir=LR;
+    node [shape=record];
+
+    node1 [xlabel="head"] [label="<f0> age|<f1> *next|<f2> *prev"];
+    node2 [xlabel="node1"] [label="<f0> age|<f1> *next|<f2> *prev"];
+    node3 [xlabel="node2"] [label="<f0> age|<f1> *next|<f2> *prev"];
+
+    node1:f1 -> node2:f1:nw;
+    node2:f1 -> node3:f1:nw;
+    node3:f1 -> node1:f1:nw;
+    node1:f2 -> node3:f1:nw;
+    node2:f2 -> node1:f1:nw;
+    node3:f2 -> node2:f1:nw;
+}
+@enddot
+
+
+@startdot hello_list_error_fix
+digraph R {
+    // 直线
+    splines=false;
+    node [shape=record];
+
+    __mptr [shape=plaintext]
+    ptr [shape=plaintext]
+    node1 [label="<f0> data|<f1> member"]
+
+    __mptr -> node1:f0:nw
+    ptr -> node1:f1:nw 
+    __mptr -> ptr [label="offset"] [dir=back]
+
+    {rank=same;ptr;__mptr}
+}
+@enddot
