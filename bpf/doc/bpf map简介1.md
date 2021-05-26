@@ -112,6 +112,11 @@ struct bpf_map_def SEC("maps") my_map = {
 
 <font color=red>不知道我的理解对不对。创建maps是用户空间的工作。而map的增删改查，既可以在用户空间，也可以在内核空间。所以这里分开介绍。</font>
 
+2021年5月26日，对上面红字进行纠错。
+我最近阅读了load_bpf_file的源码。看到，用户空间的程序，调用load_bpf_file函数，将bpf程序加载的内核。load_bpf_file会扫描bpf程序(elf格式)的各个section。对于名为maps的section，load_bpf_file会从中提取出maps的信息，并调用syscall(__NR_bpf, 0, attr, size);系统调用，创建map。
+
+
+
 <br>
 
 ## Working with BFP Maps
