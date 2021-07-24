@@ -1,0 +1,18 @@
+@startuml strategy
+class context{
+    context_use_strategy()
+}
+
+interface strategy{
+    stragegy_interface()
+}
+
+class strategy1{}
+class strategy2{}
+class strategy3{}
+
+context <.. strategy
+strategy <|.. strategy1
+strategy <|.. strategy2
+strategy <|.. strategy3
+@enduml

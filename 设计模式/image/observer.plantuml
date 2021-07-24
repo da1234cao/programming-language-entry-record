@@ -1,0 +1,18 @@
+@startuml observer
+
+class subject{
+    - observer ArrayList
+    + attach_observer()
+    + detach_observer()
+    + notify_observers()
+}
+
+interface observer{
+    update()
+}
+
+class observer1 implements observer{}
+class observer2 implements observer{}
+
+subject o-- observer
+@enduml
