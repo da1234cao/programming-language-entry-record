@@ -1,0 +1,22 @@
+#lang racket
+
+;文档见：https://blog.csdn.net/sinat_38816924/article/details/121244936#t16
+
+; 在leetcode中实现上面的代码
+(require racket/contract)
+;(require flomat)
+
+(define (next-row row) ;从杨辉三角的一行生成下一行:当前行左边添加一个0,成为新的序列A;当前行右边添加一个0,生成新的序列B;A+B为下一行的杨辉三角
+  (map + (cons 0 row) (append row '(0))))
+
+(define (triangle rows)
+  (let ([ret '((1))] [tmp '(1)])
+  (for ([i (- rows 1)])
+      (set! tmp (next-row tmp))
+      (set! ret (append ret tmp))) ; here,question;how to add 1D to 2D tail
+  ret))
+
+
+(define/contract (generate numRows)
+  (-> exact-integer? (listof (listof exact-integer?))) ;定义域(接收)和值域(产生)为，确切的正整数，二维确切正整数列表
+  (triangle numRows))
