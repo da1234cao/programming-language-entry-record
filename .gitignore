@@ -3,8 +3,9 @@
 # 排除所有.开头的隐藏文件:
 # .*
 
-### vscode的配置文件不上传
+### vscode和vs的配置文件不上传
 .vscode
+.vs
 
 ### Java不上传内容
 # *.class # 这个阔以
@@ -16,3 +17,6 @@ fuzzing/**/__pycache__
 
 ### docker中不上传的内容
 docker/**/chroot
+
+### 编译目录不上传
+**/build
